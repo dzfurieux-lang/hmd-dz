@@ -3,290 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMD-DZ | THE GHOST v20</title>
+    <title>HMD-DZ | THE MASTER v22</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&display=swap');
 
         :root {
             --dz-green: #006233;
             --dz-red: #d21034;
-            --af-black: #000000;
-            --neon-green: #00ff41;
+            --neon: #00ff41;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         body {
-            background-color: #000;
+            background: #000;
             color: #fff;
-            font-family: 'JetBrains Mono', monospace;
             margin: 0;
             overflow-x: hidden;
-            background-image: 
-                linear-gradient(to right, rgba(0, 98, 51, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(210, 16, 52, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-image: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
         }
 
-        /* --- DESIGN SYSTÈME UNIFIÉ --- */
-        .cyber-border {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 4px solid var(--dz-green);
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
+        /* --- UNIFIED UI COMPONENTS --- */
+        .hmd-panel {
+            background: rgba(15, 15, 15, 0.98);
+            border: 1px solid #222;
+            border-left: 5px solid var(--dz-green);
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,1);
         }
 
-        .cyber-input {
+        .hmd-input {
             background: #000 !important;
-            border: 1px solid #333 !important;
-            color: var(--neon-green) !important;
-            padding: 12px;
+            border: 1px solid #444 !important;
+            color: var(--neon) !important;
+            padding: 14px;
             width: 100%;
             font-size: 0.85rem;
-            border-radius: 0px;
-            transition: 0.3s ease;
-        }
-
-        .cyber-input:focus {
-            border-color: var(--dz-red) !important;
-            box-shadow: 0 0 15px rgba(210, 16, 52, 0.3);
             outline: none;
+            border-radius: 0;
+            transition: 0.3s;
         }
 
-        .btn-ghost {
+        .hmd-input:focus {
+            border-color: var(--dz-red);
+            box-shadow: 0 0 10px rgba(210, 16, 52, 0.2);
+        }
+
+        .hmd-label {
+            font-size: 0.65rem;
+            color: var(--dz-green);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .btn-master {
             background: linear-gradient(90deg, var(--dz-green), var(--dz-red));
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            letter-spacing: 3px;
+            color: white;
+            font-weight: 800;
             padding: 20px;
             width: 100%;
             cursor: pointer;
             border: none;
             text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
+            letter-spacing: 4px;
+            font-size: 1rem;
+            transition: 0.4s;
         }
 
-        .btn-ghost:hover {
+        .btn-master:hover {
             filter: brightness(1.2);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.3);
         }
 
-        /* --- ANIMATIONS --- */
-        .scan-line {
-            width: 100%;
-            height: 2px;
-            background: var(--neon-green);
-            position: absolute;
-            top: 0;
-            animation: scanning 3s linear infinite;
-            opacity: 0.5;
-            z-index: 10;
-        }
-
-        @keyframes scanning {
-            0% { top: 0; }
-            100% { top: 100%; }
-        }
-
-        /* --- SPLASH SCREEN CINÉMATIQUE --- */
+        /* --- SPLASH SCREEN --- */
         #splash {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            position: fixed; inset: 0; background: #000; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        .glitch-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 12vw, 9rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, #fff, #555);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
+        /* --- SELECTOR HUB --- */
+        .hub-card {
+            background: #080808;
+            border: 1px solid #222;
+            padding: 20px;
         }
 
-        .glitch-title::before {
-            content: "HMD-DZ";
-            position: absolute;
-            left: -2px;
-            text-shadow: 2px 0 var(--dz-red);
-            top: 0;
-            overflow: hidden;
-            clip: rect(0, 900px, 0, 0);
-            animation: glitch-anim 2s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(10px, 9999px, 50px, 0); }
-            100% { clip: rect(80px, 9999px, 100px, 0); }
-        }
-
-        /* --- DASHBOARD --- */
-        #main-ui {
-            display: none;
-            animation: fadeIn 1s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .data-card {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 15px 0;
-        }
-
-        .data-label {
-            color: var(--dz-green);
-            font-size: 0.65rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .data-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .action-btn {
+        .target-item {
             background: #fff;
             color: #000;
             padding: 12px;
-            font-weight: 900;
-            font-size: 0.75rem;
+            font-weight: 800;
             display: flex;
             justify-content: space-between;
             align-items: center;
             text-decoration: none;
-            border-left: 6px solid var(--dz-red);
+            margin-bottom: 10px;
+            border-left: 8px solid var(--dz-red);
+            font-size: 0.8rem;
             transition: 0.3s;
-            margin-bottom: 8px;
         }
 
-        .action-btn:hover {
+        .target-item:hover {
             background: var(--dz-red);
-            color: #fff;
+            color: white;
             transform: translateX(10px);
+        }
+
+        .val-display {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+            border-bottom: 1px solid #222;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            display: block;
         }
     </style>
 </head>
 <body>
 
     <div id="splash">
-        <div class="flex gap-8 mb-4 text-5xl"><span>🇩🇿</span><span>🇦🇫</span></div>
-        <h1 class="glitch-title">HMD-DZ</h1>
-        <p class="tracking-[2em] text-[10px] opacity-40 uppercase">Global Phantom Intelligence • v20</p>
-        <button onclick="boot()" class="mt-12 px-12 py-4 border border-white text-white font-bold hover:bg-white hover:text-black transition uppercase tracking-widest">Initialiser le système</button>
+        <div class="flex gap-10 mb-8 text-7xl"><span>🇩🇿</span><span>🇦🇫</span></div>
+        <h1 class="text-8xl md:text-9xl font-extrabold italic tracking-tighter mb-4">HMD-DZ</h1>
+        <p class="tracking-[2em] text-[10px] opacity-40 uppercase">Master Extraction Unit • v22</p>
+        <button onclick="boot()" class="mt-12 px-20 py-5 border-2 border-white text-white font-bold hover:bg-white hover:text-black transition-all uppercase italic tracking-[0.5em]">Lancer</button>
     </div>
 
-    <div id="main-ui" class="max-w-[1600px] mx-auto p-4 md:p-8">
+    <div id="main-ui" class="hidden max-w-[1600px] mx-auto p-4 md:p-10">
         
-        <header class="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-white/10 pb-8">
-            <div class="flex items-center gap-6">
-                <span class="text-6xl">🇩🇿</span>
+        <header class="flex flex-col md:flex-row justify-between items-center mb-16 border-b border-white/10 pb-10">
+            <div class="flex items-center gap-8">
+                <span class="text-7xl">🇩🇿</span>
                 <div>
-                    <h2 class="text-6xl font-black italic tracking-tighter leading-none">HMD-DZ</h2>
-                    <p class="text-xs text-red-600 font-bold uppercase tracking-[0.5em]">The Ghost Extraction Network</p>
+                    <h2 class="text-7xl font-extrabold italic tracking-tighter leading-none">HMD-DZ</h2>
+                    <p class="text-sm text-red-600 font-bold uppercase tracking-[0.6em]">The Master People Search Network</p>
                 </div>
             </div>
-            <div class="text-right font-mono text-[10px] hidden md:block">
-                SYSTEM: <span class="text-green-500 font-bold">ALPHA_GHOST_ONLINE</span><br>
-                U-TIME: <span id="clock" class="text-white">00:00:00</span>
+            <div class="text-right font-mono text-[10px] opacity-60 uppercase leading-relaxed">
+                Unit: <span class="text-green-500 font-bold">MASTER-CMD-22</span><br>
+                Time: <span id="clock" class="text-white">00:00:00</span>
             </div>
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
             
-            <div class="lg:col-span-3 space-y-6">
-                <div class="cyber-border p-8 relative overflow-hidden">
-                    <div class="scan-line"></div>
-                    <h3 class="text-xs font-bold mb-8 uppercase tracking-[0.3em] text-red-600 border-b border-white/5 pb-4">
-                        <i class="fa-solid fa-crosshairs mr-2"></i> Ciblage Chirurgical (Saisie d'Expert)
+            <div class="lg:col-span-3 space-y-8">
+                <div class="hmd-panel">
+                    <h3 class="text-xs font-bold mb-10 uppercase tracking-[0.4em] text-red-600 border-b border-white/5 pb-4">
+                        <i class="fa-solid fa-crosshairs mr-4"></i> Paramètres de recherche d'expert
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <div><label class="data-label">Prénom</label><input id="in-fn" class="cyber-input" placeholder="Ahmed"></div>
-                        <div><label class="data-label">Nom de Famille</label><input id="in-ln" class="cyber-input" placeholder="Benchaabane"></div>
-                        <div><label class="data-label">Pseudo (@)</label><input id="in-un" class="cyber-input" placeholder="@dark_hmd"></div>
-                        <div><label class="data-label">Année Naissance</label><input id="in-yr" class="cyber-input" placeholder="Ex: 1995"></div>
+                        <div><span class="hmd-label">Prénom</span><input id="in-fn" class="hmd-input" placeholder="Assiya"></div>
+                        <div><span class="hmd-label">Nom de Famille</span><input id="in-ln" class="hmd-input" placeholder="Courage"></div>
+                        <div><span class="hmd-label">Pseudo (@)</span><input id="in-un" class="hmd-input" placeholder="@dark_hmd"></div>
+                        <div><span class="hmd-label">Année Naissance</span><input id="in-yr" class="hmd-input" placeholder="Ex: 1998"></div>
                         
-                        <div><label class="data-label">Ville / Région</label><input id="in-ci" class="cyber-input" placeholder="Alger, Paris..."></div>
-                        <div><label class="data-label">Quartier / Rue</label><input id="in-ad" class="cyber-input"></div>
-                        <div><label class="data-label">Nom du Père</label><input id="in-fat" class="cyber-input"></div>
-                        <div><label class="data-label">Email / Tél</label><input id="in-con" class="cyber-input"></div>
+                        <div><span class="hmd-label">Ville de résidence</span><input id="in-ci" class="hmd-input" placeholder="Paris, Alger..."></div>
+                        <div><span class="hmd-label">Adresse / Rue</span><input id="in-ad" class="hmd-input"></div>
+                        <div><span class="hmd-label">Nom du Père</span><input id="in-fat" class="hmd-input"></div>
+                        <div><span class="hmd-label">Tél / Email</span><input id="in-con" class="hmd-input"></div>
                     </div>
 
-                    <button onclick="execute()" class="btn-ghost mt-10">Lancer l'Extraction Spectrale</button>
+                    <button onclick="masterHunt()" class="btn-master mt-12">Lancer l'extraction et le hub de sélection</button>
                 </div>
 
-                <div class="bg-black border border-white/5 p-4 h-24 overflow-y-auto font-mono text-[9px] text-green-500" id="logs">
-                    <div>> SYSTEM INITIALIZED. WAITING FOR DATA INJECTION...</div>
+                <div class="bg-black border border-white/5 p-4 h-24 overflow-y-auto font-mono text-[10px] text-green-500" id="logs">
+                    <div>> SYSTEM READY. AWAITING TARGET IDENTIFICATION...</div>
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <div class="cyber-border p-6 min-h-[480px] rounded-sm">
-                    <h3 class="text-[10px] font-bold mb-6 border-b border-white/5 pb-2 uppercase text-red-600 italic">Rapports Cloud v20</h3>
-                    <div id="oracle-box" class="space-y-2">
-                        <div class="text-center py-24 opacity-10"><i class="fa-solid fa-satellite-dish text-6xl"></i></div>
+            <div class="space-y-8">
+                <div class="hmd-panel p-6 min-h-[500px]">
+                    <h3 class="text-[10px] font-bold mb-8 border-b border-white/5 pb-2 uppercase text-red-600 italic">Master Oracle v22</h3>
+                    <div id="oracle-list" class="space-y-3">
+                        <div class="text-center py-24 opacity-10"><i class="fa-solid fa-satellite text-7xl"></i></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="discovery-hub" class="mt-12 hidden">
-            <h3 class="text-4xl font-black italic uppercase mb-8 border-l-[12px] border-dz-green pl-6">
-                <i class="fa-solid fa-users-viewfinder mr-4 text-green-500"></i> Hub de Localisation (RÉSULTATS RÉELS)
+        <div id="hub-selector" class="mt-16 hidden">
+            <h3 class="text-4xl font-extrabold italic uppercase mb-10 border-l-[15px] border-dz-green pl-8 text-white">
+                <i class="fa-solid fa-list-check mr-6 text-green-500"></i> Hub de sélection cible (RÉSULTATS RÉELS)
             </h3>
+            
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="cyber-border p-6">
-                    <span class="text-[10px] font-bold text-green-500 uppercase">Extraction d'Adresse & Tél</span>
-                    <p class="text-[9px] opacity-40 mb-4 italic mt-1">Le système a généré des liens vers les registres domiciliaires.</p>
-                    <div id="h-loc" class="space-y-2"></div>
+                <div class="hub-card hmd-panel">
+                    <span class="hmd-label">Annuaires (Adresse & Tél)</span>
+                    <p class="text-[10px] opacity-40 mb-6 italic">Ouvrez pour trouver l'adresse exacte et le téléphone fixe.</p>
+                    <div id="hub-annu" class="space-y-2"></div>
                 </div>
-                <div class="cyber-border p-6">
-                    <span class="text-[10px] font-bold text-green-500 uppercase">Extraction de l'Âge & Parcours</span>
-                    <p class="text-[9px] opacity-40 mb-4 italic mt-1">Recherche dans les archives scolaires et professionnelles.</p>
-                    <div id="h-id" class="space-y-2"></div>
+                <div class="hub-card hmd-panel">
+                    <span class="hmd-label">Gens (Âge & Photos)</span>
+                    <p class="text-[10px] opacity-40 mb-6 italic">Ouvrez pour voir la liste des personnes, leur âge et leur visage.</p>
+                    <div id="hub-people" class="space-y-2"></div>
                 </div>
-                <div class="cyber-border p-6">
-                    <span class="text-[10px] font-bold text-green-500 uppercase">Extraction Sociale & Privée</span>
-                    <p class="text-[9px] opacity-40 mb-4 italic mt-1">Pivots vers les services de livraison et comptes cachés.</p>
-                    <div id="h-priv" class="space-y-2"></div>
+                <div class="hub-card hmd-panel">
+                    <span class="hmd-label">Archives (Privé & Leaks)</span>
+                    <p class="text-[10px] opacity-40 mb-6 italic">Ouvrez pour chercher les documents PDF et les fuites de mails.</p>
+                    <div id="hub-deep" class="space-y-2"></div>
                 </div>
             </div>
         </div>
 
-        <div id="dossier" class="mt-12 hidden pb-32">
-            <div class="cyber-border p-12 border-l-[20px] border-dz-red bg-[#050505]">
-                <div class="flex flex-col md:flex-row justify-between mb-16 gap-10">
+        <div id="dossier" class="mt-16 hidden pb-40">
+            <div class="hmd-panel p-12 border-l-[20px] border-dz-red bg-[#050505]">
+                <div class="flex flex-col md:flex-row justify-between mb-16 gap-12">
                     <div>
-                        <span class="bg-red-600 text-white text-[8px] px-3 py-1 font-bold mb-4 inline-block uppercase italic">Rapport Classifié HMD-DZ</span>
-                        <h3 class="text-7xl font-black uppercase italic tracking-tighter" id="d-title">CIBLE_EXTRÊME</h3>
+                        <span class="bg-red-600 text-white text-[9px] px-3 py-1 font-bold mb-6 inline-block uppercase italic">Rapport Master HMD-DZ</span>
+                        <h3 class="text-8xl font-extrabold uppercase italic tracking-tighter" id="d-title">CIBLE_SCAN</h3>
                     </div>
-                    <div class="text-9xl flex gap-6"><span>🇩🇿</span><span>🇦🇫</span></div>
+                    <div class="text-9xl flex gap-10"><span>🇩🇿</span><span>🇦🇫</span></div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                    <div class="data-card"><span class="data-label">Identité Civile</span><span id="r-name" class="data-value">---</span></div>
-                    <div class="data-card"><span class="data-label">Année de Naissance</span><span id="r-yr" class="data-value">---</span></div>
-                    <div class="data-card"><span class="data-label">Localisation Probable</span><span id="r-loc" class="data-value">---</span></div>
-                    <div class="data-card"><span class="data-label">Filiation (Père)</span><span id="r-fat" class="data-value">---</span></div>
+                    <div><span class="hmd-label">Nom Prénom Détecté</span><span id="r-name" class="val-display">---</span></div>
+                    <div><span class="hmd-label">Année de Naissance</span><span id="r-yr" class="val-display">---</span></div>
+                    <div><span class="hmd-label">Localisation Probable</span><span id="r-loc" class="val-display">---</span></div>
+                    <div><span class="hmd-label">Contact / Tél</span><span id="r-con" class="val-display text-sm">---</span></div>
                 </div>
 
-                <div class="mt-16 border-t border-white/5 pt-12">
-                    <h4 class="text-sm font-bold text-red-600 uppercase mb-6 underline italic">Analyse du Spectre Numérique :</h4>
+                <div class="mt-20 border-t border-white/5 pt-16">
+                    <h4 class="text-sm font-bold text-red-600 uppercase mb-8 underline italic">Analyse du Maître Enquêteur :</h4>
                     <p id="r-note" class="text-sm italic opacity-50 leading-relaxed font-serif"></p>
                 </div>
             </div>
@@ -295,7 +241,7 @@
     </div>
 
     <script>
-        // HORLOGE UNIFIÉE
+        // HORLOGE
         setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
 
         // BOOT SYSTEM
@@ -311,8 +257,8 @@
             l.scrollTop = l.scrollHeight;
         }
 
-        // MOTEUR D'EXTRACTION v20 THE GHOST
-        function execute() {
+        // MOTEUR DE TRAQUE MASTER
+        function masterHunt() {
             const i = {
                 fn: document.getElementById('in-fn').value.trim(),
                 ln: document.getElementById('in-ln').value.trim(),
@@ -326,61 +272,59 @@
 
             if(!i.fn && !i.ln && !i.un) { alert("ERREUR : Saisie de cible invalide."); return; }
 
-            log(`Initialisation de l'extraction fantôme sur ${i.fn} ${i.ln}...`);
-            document.getElementById('discovery-hub').classList.remove('hidden');
+            log(`Extraction MASTER lancée sur : ${i.fn} ${i.ln}`);
+            document.getElementById('hub-selector').classList.remove('hidden');
             document.getElementById('dossier').classList.remove('hidden');
 
             // --- 1. RAPPORT ---
-            document.getElementById('d-title').innerText = i.ln || i.un || "PHANTOM";
+            document.getElementById('d-title').innerText = i.ln || i.un || "TARGET";
             document.getElementById('r-name').innerText = `${i.fn} ${i.ln}`.trim() || "INCONNU";
-            document.getElementById('r-yr').innerText = i.yr || "DÉDUCTION VIA PDF";
-            document.getElementById('r-loc').innerText = `${i.ci} ${i.ad}`.trim() || "MONDE";
-            document.getElementById('r-fat').innerText = i.fat || "--";
+            document.getElementById('r-yr').innerText = i.yr || "RECHERCHE PDF REQUISE";
+            document.getElementById('r-loc').innerText = `${i.ci} ${i.ad}`.trim() || "ZONE MONDIALE";
+            document.getElementById('r-con').innerText = i.con || "NON DÉTECTÉ";
 
-            document.getElementById('r-note').innerText = `L'analyse du sujet ${i.fn} a permis de générer des vecteurs de traque. L'adresse physique est extractible via les boutons de registres (PagesBlanches). La date de naissance peut être confirmée par le bouton "Archives PDF" qui cible les listes électorales et scolaires. Les activités de consommation (Vinted) sont des points de pivot critiques.`;
+            document.getElementById('r-note').innerText = `L'individu ${i.fn} est sous surveillance. Pour l'ADRESSE, utilisez le bouton PagesBlanches dans le Hub ci-dessous. Pour l'ÂGE RÉEL, utilisez PeekYou ou WhitePages : ils listent toutes les personnes portant ce nom avec leur âge et ville. Les archives PDF (listes scolaires) sont la clé pour l'année de naissance exacte.`;
 
-            // --- 2. HUB DE DÉCOUVERTE (LE CŒUR DE LA RECHERCHE) ---
-            const hLoc = document.getElementById('h-loc');
-            const hId = document.getElementById('h-id');
-            const hPriv = document.getElementById('h-priv');
-            hLoc.innerHTML = hId.innerHTML = hPriv.innerHTML = "";
+            // --- 2. HUB DE SÉLECTION (LES VRAIS MOTEURS) ---
+            const hAnnu = document.getElementById('hub-annu');
+            const hPeople = document.getElementById('hub-people');
+            const hDeep = document.getElementById('hub-deep');
+            hAnnu.innerHTML = hPeople.innerHTML = hDeep.innerHTML = "";
 
-            // LOCALISATION (Trouver l'adresse et le tel)
-            const locLinks = [
-                {t: `Trouver l'Adresse Exacte (PagesBlanches)`, l: `https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${i.fn}+${i.ln}&ou=${i.ci}`},
-                {t: `Satellite Google Maps (Cible)`, l: `https://www.google.com/maps/search/${encodeURIComponent(i.ad + ' ' + i.ci)}`},
-                {t: `Registre des Commerces (Si gérant)`, l: `https://www.infogreffe.fr/recherche-entreprise-dirigeant/resultats-recherche-entreprise-dirigeant.html?phrase=${i.ln}`}
+            // ANNUAIRES (POUR L'ADRESSE)
+            const annu = [
+                {t: `PagesBlanches : Voir adresses de ${i.fn} ${i.ln}`, l: `https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${i.fn}+${i.ln}&ou=${i.ci}`},
+                {t: `Infogreffe (Registre entreprises)`, l: `https://www.infogreffe.fr/recherche-entreprise-dirigeant/resultats-recherche-entreprise-dirigeant.html?phrase=${i.ln}`},
+                {t: `LinkedIn : Localiser le job`, l: `https://www.google.com/search?q=site:linkedin.com/in+"${i.fn}+${i.ln}"`}
             ];
-            // IDENTITE (Trouver l'âge et le parcours)
-            const idLinks = [
-                {t: `Extraire l'Âge (Archives PDF / Diplômes)`, l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+filetype:pdf`},
-                {t: `Chercher l'Année (Copains d'Avant)`, l: `https://copainsdavant.linternaute.com/s/?q=${i.fn}+${i.ln}`},
-                {t: `Parcours LinkedIn (Job & École)`, l: `https://www.google.com/search?q=site:linkedin.com/in+"${i.fn}+${i.ln}"`}
+            // GENS (POUR L'AGE ET LES PHOTOS)
+            const people = [
+                {t: `PeekYou : Liste mondiale et âges`, l: `https://www.peekyou.com/${i.fn}_${i.ln}`},
+                {t: `Social-Searcher : Analyse réseaux`, l: `https://www.social-searcher.com/search-users/?q=${i.fn}+${i.ln}`},
+                {t: `WhitePages : Dossier de personnes`, l: `https://www.whitepages.com/name/${i.fn}-${i.ln}`}
             ];
-            // PRIVE (Comptes cachés)
-            const privLinks = [
-                {t: `Vinted (Ville de livraison & Prénom)`, l: `https://www.vinted.fr/member/${i.un || i.fn}`},
+            // ARCHIVES
+            const deep = [
+                {t: `Archives PDF (Diplômes, Examens, CV)`, l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+filetype:pdf`},
                 {t: `FaceCheck.ID (Reconnaissance Faciale)`, l: `https://facecheck.id/`},
-                {t: `Facebook People Hunter`, l: `https://www.facebook.com/search/people/?q=${i.fn}+${i.ln}`}
+                {t: `Epieos Email Tracker`, l: `https://epieos.com/?q=${i.con}`}
             ];
 
-            locLinks.forEach(x => hLoc.innerHTML += `<a href="${x.l}" target="_blank" class="action-btn"><span>${x.t}</span> <i class="fa-solid fa-chevron-right"></i></a>`);
-            idLinks.forEach(x => hId.innerHTML += `<a href="${x.l}" target="_blank" class="action-btn" style="border-left-color: var(--dz-green)"><span>${x.t}</span> <i class="fa-solid fa-chevron-right"></i></a>`);
-            privLinks.forEach(x => hPriv.innerHTML += `<a href="${x.l}" target="_blank" class="action-btn" style="border-left-color: #555"><span>${x.t}</span> <i class="fa-solid fa-chevron-right"></i></a>`);
+            annu.forEach(x => hAnnu.innerHTML += `<a href="${x.l}" target="_blank" class="target-item"><span>${x.t}</span> <i class="fa-solid fa-chevron-right"></i></a>`);
+            people.forEach(x => hPeople.innerHTML += `<a href="${x.l}" target="_blank" class="target-item" style="border-left-color: var(--dz-green)"><span>${x.t}</span> <i class="fa-solid fa-chevron-right"></i></a>`);
+            deep.forEach(x => hDeep.innerHTML += `<a href="${x.l}" target="_blank" class="target-item" style="border-left-color: #555"><span>${x.t}</span> <i class="fa-solid fa-chevron-right"></i></a>`);
 
             // --- 3. ORACLE SIDEBAR ---
-            const ora = document.getElementById('oracle-box');
-            ora.innerHTML = "";
-            const oracle = [
-                {t: "Instagram Phantoms", l: `https://www.google.com/search?q=site:instagram.com+"${i.un || i.fn + i.ln}"`},
-                {t: "TikTok Intelligence", l: `https://www.tiktok.com/@${i.un}`},
-                {t: "Epieos Email Tracker", l: `https://epieos.com/?q=${i.con}`},
-                {t: "Plaque Immatriculation", l: `https://www.google.com/search?q="${i.ex}"`}
-            ];
-            oracle.forEach(x => ora.innerHTML += `<a href="${x.l}" target="_blank" class="block bg-white text-black p-3 rounded font-bold text-[10px] mb-2 hover:bg-dz-green hover:text-white transition uppercase">${x.t}</a>`);
+            const ora = document.getElementById('oracle-list');
+            ora.innerHTML = `
+                <a href="https://www.instagram.com/${i.un}" target="_blank" class="target-item">Instagram Scan</a>
+                <a href="https://www.tiktok.com/search/user?q=${i.fn}+${i.ln}" target="_blank" class="target-item">TikTok Intelligence</a>
+                <a href="https://www.vinted.fr/member/${i.un || i.fn}" target="_blank" class="target-item">Vinted (Livraison)</a>
+                <a href="https://www.snapchat.com/add/${i.un}" target="_blank" class="target-item">Snapchat Discovery</a>
+            `;
 
-            log("EXTRACTION TERMINÉE. UTILISEZ LE HUB POUR DÉVOILER L'ADRESSE ET L'ÂGE.");
-            document.getElementById('discovery-hub').scrollIntoView({ behavior: 'smooth' });
+            log("EXTRACTION TERMINÉE. UTILISEZ LE HUB DE SÉLECTION POUR LES INFOS RÉELLES.");
+            document.getElementById('hub-selector').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
