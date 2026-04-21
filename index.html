@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMD-DZ | V29 ULTIMATE</title>
+    <title>HMD-DZ | V30 THE GLOBALIST</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -17,6 +17,7 @@
             --neon-blue: #58a6ff;
             --neon-gold: #e3b341;
             --neon-purple: #8957e5;
+            --neon-pink: #d946ef;
         }
 
         * { box-sizing: border-box; font-family: 'JetBrains Mono', monospace; }
@@ -70,7 +71,7 @@
         .dossier-card { background: #0d1117; border: 1px solid #30363d; padding: 25px; border-radius: 8px; border-left: 8px solid var(--dz-red); }
         .data-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 0; }
         .d-label { color: #8b949e; font-size: 0.65rem; text-transform: uppercase; font-weight: bold; }
-        .d-val { color: #fff; font-size: 0.9rem; font-weight: bold; }
+        .d-val { color: #fff; font-size: 0.9rem; font-weight: bold; text-align: right; }
     </style>
 </head>
 <body>
@@ -81,11 +82,11 @@
                 <span class="text-4xl">🇩🇿</span>
                 <div class="text-left">
                     <h2 class="hero-logo">HMD-DZ</h2>
-                    <p class="text-[10px] uppercase tracking-[0.4em] text-red-500 font-bold">OSINT Dashboard V29</p>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-red-500 font-bold">Global & Youth OSINT V30</p>
                 </div>
             </div>
             <div class="font-mono text-[10px] opacity-50 mt-4 md:mt-0 text-right">
-                STATUS: <span class="text-green-500">ONLINE</span><br>
+                STATUS: <span class="text-green-500">GLOBAL_NETWORK_ACTIVE</span><br>
                 TIME: <span id="clock">00:00:00</span>
             </div>
         </header>
@@ -95,33 +96,33 @@
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
                 <div class="lg:col-span-3">
                     <div class="panel">
-                        <div class="section-title"><i class="fa-solid fa-database"></i> Informations de la Cible</div>
+                        <div class="section-title"><i class="fa-solid fa-earth-americas"></i> Paramètres de Ciblage International & Jeunesse</div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                            <div><span class="input-label">Prénom</span><input id="i-fn" class="input-box" placeholder="Ex: Jean"></div>
-                            <div><span class="input-label">Nom de Famille</span><input id="i-ln" class="input-box" placeholder="Dupont"></div>
-                            <div><span class="input-label">Date Naissance</span><input id="i-dob" class="input-box" placeholder="JJ/MM/AAAA"></div>
-                            <div><span class="input-label">Pseudo (@)</span><input id="i-un" class="input-box" placeholder="@pseudo"></div>
+                            <div><span class="input-label">Prénom</span><input id="i-fn" class="input-box" placeholder="Ex: Rayan"></div>
+                            <div><span class="input-label">Nom de Famille</span><input id="i-ln" class="input-box" placeholder="Cherif"></div>
+                            <div><span class="input-label">Pays de la Cible</span><input id="i-nat" class="input-box" placeholder="France, Maroc, Canada..."></div>
+                            <div><span class="input-label">Pseudo (@) / GamerTag</span><input id="i-un" class="input-box" placeholder="Pseudo principal"></div>
                             
                             <div class="md:col-span-2"><span class="input-label">Adresse / Rue</span><input id="i-ad" class="input-box"></div>
-                            <div><span class="input-label">Code Postal / Ville</span><input id="i-ci" class="input-box"></div>
-                            <div><span class="input-label">Lien Photo (URL)</span><input id="i-pic" class="input-box" placeholder="https://lien-photo.jpg"></div>
+                            <div><span class="input-label">Code Postal / Ville</span><input id="i-ci" class="input-box" placeholder="Ex: Bruxelles"></div>
+                            <div><span class="input-label">École / Lycée / Collège</span><input id="i-school" class="input-box" placeholder="Lycée..."></div>
 
                             <div><span class="input-label">Email</span><input id="i-em" class="input-box"></div>
                             <div><span class="input-label">Téléphone</span><input id="i-ph" class="input-box"></div>
-                            <div><span class="input-label">Matricule (CAF/SS)</span><input id="i-id" class="input-box"></div>
-                            <div><span class="input-label">Nom Famille Parents</span><input id="i-fat" class="input-box"></div>
+                            <div><span class="input-label">Jeux joués</span><input id="i-game" class="input-box" placeholder="Minecraft, Roblox..."></div>
+                            <div><span class="input-label">Lien Photo (URL)</span><input id="i-pic" class="input-box" placeholder="https://..."></div>
                         </div>
 
-                        <button onclick="strike()" class="btn-master">Lancer la recherche totale</button>
+                        <button onclick="strike()" class="btn-master">Lancer le scan Global & Mineurs</button>
                     </div>
                 </div>
 
                 <div class="space-y-6">
                     <div class="panel h-full flex flex-col">
-                        <div class="section-title text-green-500 border-green-500/30">Console</div>
+                        <div class="section-title text-green-500 border-green-500/30">Console Opérationnelle</div>
                         <div id="term" class="flex-1 bg-black p-4 border border-white/10 rounded text-[10px] text-green-500 font-mono overflow-y-auto">
-                            > HMD-DZ v29 PRÊT.<br>> NOUVEAUX MODULES AJOUTÉS.<br>> EN ATTENTE...
+                            > MOTEUR V30 GLOBALIST PRÊT.<br>> PROTOCOLES JEUNESSE ACTIVÉS.<br>> EN ATTENTE...
                         </div>
                     </div>
                 </div>
@@ -132,21 +133,26 @@
                 <div class="dossier-card mb-8">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-2xl font-black italic uppercase text-white">Dossier #<span id="uid-num"></span></h3>
-                        <span class="bg-red-600 text-white text-[10px] px-2 py-1 font-bold rounded uppercase">Recherche Active</span>
+                        <span class="bg-red-600 text-white text-[10px] px-2 py-1 font-bold rounded uppercase">Recherche Internationale</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div class="data-row"><span class="d-label">Identité</span><span class="d-val" id="r-name"></span></div>
-                        <div class="data-row"><span class="d-label">Ville</span><span class="d-val" id="r-loc"></span></div>
-                        <div class="data-row"><span class="d-label">Contact</span><span class="d-val" id="r-con"></span></div>
-                        <div class="data-row"><span class="d-label">Photo</span><span class="d-val text-blue-400" id="r-pic"></span></div>
+                        <div class="data-row"><span class="d-label">Zone/Pays</span><span class="d-val" id="r-loc"></span></div>
+                        <div class="data-row"><span class="d-label">Pseudo/Gaming</span><span class="d-val" id="r-game"></span></div>
+                        <div class="data-row"><span class="d-label">École</span><span class="d-val text-blue-400" id="r-school"></span></div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
                     
+                    <div class="panel p-4" style="border-top: 4px solid var(--neon-pink); margin-bottom: 0;">
+                        <h4 class="text-xs font-bold text-pink-500 uppercase mb-3"><i class="fa-solid fa-gamepad mr-2"></i> Mineurs & Gaming</h4>
+                        <div id="out-youth" class="space-y-2"></div>
+                    </div>
+
                     <div class="panel p-4" style="border-top: 4px solid var(--dz-green); margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-green-500 uppercase mb-3"><i class="fa-solid fa-map-pin mr-2"></i> Adresses & Sociétés</h4>
-                        <div id="out-annu" class="space-y-2"></div>
+                        <h4 class="text-xs font-bold text-green-500 uppercase mb-3"><i class="fa-solid fa-earth-americas mr-2"></i> Adresses Internationales</h4>
+                        <div id="out-intl" class="space-y-2"></div>
                     </div>
 
                     <div class="panel p-4" style="border-top: 4px solid var(--neon-blue); margin-bottom: 0;">
@@ -154,9 +160,9 @@
                         <div id="out-img" class="space-y-2"></div>
                     </div>
 
-                    <div class="panel p-4" style="border-top: 4px solid var(--neon-purple); margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-purple-400 uppercase mb-3"><i class="fa-solid fa-users mr-2"></i> Famille & Âge</h4>
-                        <div id="out-fam" class="space-y-2"></div>
+                    <div class="panel p-4" style="border-top: 4px solid var(--neon-gold); margin-bottom: 0;">
+                        <h4 class="text-xs font-bold text-yellow-500 uppercase mb-3"><i class="fa-solid fa-graduation-cap mr-2"></i> Écoles & Examens</h4>
+                        <div id="out-school" class="space-y-2"></div>
                     </div>
 
                     <div class="panel p-4" style="border-top: 4px solid var(--dz-red); margin-bottom: 0;">
@@ -164,13 +170,8 @@
                         <div id="out-leaks" class="space-y-2"></div>
                     </div>
 
-                    <div class="panel p-4" style="border-top: 4px solid var(--neon-gold); margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-yellow-500 uppercase mb-3"><i class="fa-solid fa-file-pdf mr-2"></i> Fichiers & Admin</h4>
-                        <div id="out-gov" class="space-y-2"></div>
-                    </div>
-
                     <div class="panel p-4" style="border-top: 4px solid #fff; margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-white uppercase mb-3"><i class="fa-solid fa-globe mr-2"></i> Réseaux & Pseudos</h4>
+                        <h4 class="text-xs font-bold text-white uppercase mb-3"><i class="fa-solid fa-globe mr-2"></i> Réseaux Sociaux</h4>
                         <div id="out-soc" class="space-y-2"></div>
                     </div>
 
@@ -186,10 +187,13 @@
             const data = {
                 fn: document.getElementById('i-fn').value.trim(),
                 ln: document.getElementById('i-ln').value.trim(),
+                nat: document.getElementById('i-nat').value.trim(),
                 ci: document.getElementById('i-ci').value.trim(),
                 em: document.getElementById('i-em').value.trim(),
                 ph: document.getElementById('i-ph').value.trim(),
                 un: document.getElementById('i-un').value.trim().replace('@',''),
+                school: document.getElementById('i-school').value.trim(),
+                game: document.getElementById('i-game').value.trim(),
                 pic: document.getElementById('i-pic').value.trim()
             };
 
@@ -200,71 +204,73 @@
             // MAJ DOSSIER
             document.getElementById('uid-num').innerText = Math.floor(Math.random()*90000) + "-DZ";
             document.getElementById('r-name').innerText = `${data.fn} ${data.ln}`.trim() || "INCONNU";
-            document.getElementById('r-loc').innerText = data.ci || "NON SPÉCIFIÉE";
-            document.getElementById('r-con').innerText = data.em || data.ph || "AUCUN";
-            document.getElementById('r-pic').innerText = data.pic ? "PHOTO CHARGÉE" : "PAS DE PHOTO";
+            document.getElementById('r-loc').innerText = `${data.ci} ${data.nat}`.trim() || "NON SPÉCIFIÉE";
+            document.getElementById('r-game').innerText = data.un || "AUCUN PSEUDO";
+            document.getElementById('r-school').innerText = data.school || "NON SPÉCIFIÉE";
 
             // OUTILS DE RECHERCHE
-            const oAnnu = document.getElementById('out-annu');
+            const oYouth = document.getElementById('out-youth');
+            const oIntl = document.getElementById('out-intl');
             const oImg = document.getElementById('out-img');
-            const oFam = document.getElementById('out-fam');
+            const oSchool = document.getElementById('out-school');
             const oLeaks = document.getElementById('out-leaks');
-            const oGov = document.getElementById('out-gov');
             const oSoc = document.getElementById('out-soc');
 
-            oAnnu.innerHTML = oImg.innerHTML = oFam.innerHTML = oLeaks.innerHTML = oGov.innerHTML = oSoc.innerHTML = "";
+            oYouth.innerHTML = oIntl.innerHTML = oImg.innerHTML = oSchool.innerHTML = oLeaks.innerHTML = oSoc.innerHTML = "";
 
-            // 1. ANNUAIRES & SOCIÉTÉS
-            const annuLinks = [
-                {t: "PagesBlanches (Adresse)", l: `https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${data.fn}+${data.ln}&ou=${data.ci}`},
-                {t: "Pappers (Entreprises & Adresses)", l: `https://www.pappers.fr/recherche-dirigeants?q=${data.fn}+${data.ln}`},
-                {t: "WebMii (Recherche Globale)", l: `https://webmii.com/people?n=%22${data.fn}%20${data.ln}%22`}
+            // 1. MINEURS & GAMING (Nouveau)
+            const youthLinks = [
+                {t: "NameMC (Historique pseudo Minecraft)", l: `https://namemc.com/search?q=${data.un || data.fn+data.ln}`},
+                {t: "SteamID (Recherche Joueur Steam)", l: `https://steamid.io/lookup/${data.un || data.fn+data.ln}`},
+                {t: "TikTok Intelligence", l: `https://www.tiktok.com/search/user?q=${data.un || data.fn+'+'+data.ln}`},
+                {t: "Snapchat (Découverte)", l: `https://www.snapchat.com/add/${data.un || data.fn+data.ln}`}
             ];
 
-            // 2. IMAGES & VISAGES
+            // 2. INTERNATIONAL & ANNUAIRES (Nouveau Dork Global)
+            const intlLinks = [
+                {t: "Recherche Globale d'Annuaire", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+directory+OR+annuaire+OR+phonebook+${data.nat || ''}`},
+                {t: "WebMii (Recherche Internationale)", l: `https://webmii.com/people?n=%22${data.fn}%20${data.ln}%22`},
+                {t: "Pipl / FamilyTree (Global)", l: `https://www.familytreenow.com/search/genealogy/results?first=${data.fn}&last=${data.ln}`},
+                {t: "PagesBlanches (France uniquement)", l: `https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${data.fn}+${data.ln}&ou=${data.ci}`}
+            ];
+
+            // 3. IMAGES & VISAGES
             const imgLinks = [
+                {t: "FaceCheck.ID (Reconnaissance)", l: `https://facecheck.id/`},
                 {t: "Yandex (Recherche visage)", l: `https://yandex.com/images/search?url=${data.pic || ''}&rpt=imageview`},
-                {t: "TinEye (Retrouver la photo)", l: `https://tineye.com/search?url=${data.pic || ''}`},
-                {t: "Google Images", l: `https://lens.google.com/uploadbyurl?url=${data.pic || ''}`}
+                {t: "TinEye (Retrouver la photo)", l: `https://tineye.com/search?url=${data.pic || ''}`}
             ];
 
-            // 3. FAMILLE & GÉNÉALOGIE
-            const famLinks = [
-                {t: "Geneanet (Arbres & Parents)", l: `https://en.geneanet.org/fonds/individus/?go=1&nom=${data.ln}&prenom=${data.fn}`},
-                {t: "Filae (Archives Françaises)", l: `https://www.filae.com/v4/genealogie/search.mvc/Searchform?LastName=${data.ln}&FirstName=${data.fn}`},
-                {t: "Avis de Décès (Famille)", l: `https://www.libramemoria.com/defunts/avis?nom=${data.ln}&prenom=${data.fn}`}
+            // 4. ÉCOLES & RÉSULTATS SCOLAIRES (Pour trouver l'âge et la ville des jeunes)
+            const schoolLinks = [
+                {t: "Résultats Brevet/Bac (Google Dork)", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+admis+OR+resultat+OR+bac+OR+brevet+${data.school || ''}`},
+                {t: "Listes Scolaires (Fichiers PDF)", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+${data.school || ''}+filetype:pdf`},
+                {t: "Copains d'Avant (Écoles passées)", l: `https://copainsdavant.linternaute.com/s/?q=${data.fn}+${data.ln}`}
             ];
 
-            // 4. LEAKS
+            // 5. LEAKS
             const leaksLinks = [
-                {t: "IntelligenceX (Moteur Global)", l: `https://intelx.io/?s=${data.em || data.fn + '+' + data.ln}`},
+                {t: "IntelligenceX (Moteur Global)", l: `https://intelx.io/?s=${data.em || data.un || data.fn + '+' + data.ln}`},
                 {t: "BreachDirectory (Mots de passe)", l: `https://breachdirectory.org/`},
                 {t: "Epieos (Infos du Mail Google)", l: `https://epieos.com/?q=${data.em}`}
             ];
 
-            // 5. GOUV & PDF
-            const govLinks = [
-                {t: "Chercher PDF (CV, Examens)", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+filetype:pdf`},
-                {t: "Fichiers Excel (Listes)", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+filetype:xls+OR+filetype:csv`},
-                {t: "Cadastre & Propriétés", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+proprietaire+OR+adresse`}
-            ];
-
             // 6. SOCIAUX
             const socLinks = [
-                {t: "WhatsMyName (Trouver le pseudo)", l: `https://whatsmyname.app/?q=${data.un || data.fn + data.ln}`},
-                {t: "Facebook (Recherche)", l: `https://www.facebook.com/search/people/?q=${data.fn}+${data.ln}`},
-                {t: "LinkedIn (Travail & Études)", l: `https://www.google.com/search?q=site:linkedin.com/in+%22${data.fn}+${data.ln}%22`}
+                {t: "WhatsMyName (Traque pseudo globale)", l: `https://whatsmyname.app/?q=${data.un || data.fn + data.ln}`},
+                {t: "Facebook Search", l: `https://www.facebook.com/search/people/?q=${data.fn}+${data.ln}`},
+                {t: "Instagram (Mentions Google)", l: `https://www.google.com/search?q=site:instagram.com+%22${data.fn}+${data.ln}%22`}
             ];
 
             // Remplissage
-            annuLinks.forEach(x => oAnnu.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--dz-green)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            youthLinks.forEach(x => oYouth.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-pink)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            intlLinks.forEach(x => oIntl.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--dz-green)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
             imgLinks.forEach(x => oImg.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-blue)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
-            famLinks.forEach(x => oFam.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-purple)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            schoolLinks.forEach(x => oSchool.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-gold)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
             leaksLinks.forEach(x => oLeaks.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--dz-red)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
-            govLinks.forEach(x => oGov.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-gold)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
             socLinks.forEach(x => oSoc.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: #fff"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
 
-            document.getElementById('term').innerHTML += `<div>[${new Date().toLocaleTimeString()}] > RECHERCHE TERMINÉE.</div>`;
+            document.getElementById('term').innerHTML += `<div>[${new Date().toLocaleTimeString()}] > DONNÉES INTERNATIONALES ET MINEURS EXTRAITES.</div>`;
             document.getElementById('results-hub').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
