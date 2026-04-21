@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMD-DZ | GOD-MODE OSINT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --dz-green: #006233;
+            --dz-red: #d21034;
+            --hacker: #00ff41;
+        }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: #000;
+            color: #fff;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- SPLASH SCREEN --- */
+        #splash {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(to right, var(--dz-green), #fff, var(--dz-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(0,255,65,0.4));
+        }
+
+        .btn-unlock {
+            margin-top: 40px;
+            padding: 20px 80px;
+            border: 2px solid var(--dz-green);
+            background: transparent;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 5px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .btn-unlock:hover {
+            background: var(--dz-green);
+            box-shadow: 0 0 50px var(--dz-green);
+            transform: scale(1.1);
+        }
+
+        /* --- MAIN DASHBOARD --- */
+        #main-dashboard {
+            display: none;
+            padding: 20px;
+        }
+
+        .panel-v12 {
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid #222;
+            border-left: 5px solid var(--dz-green);
+            box-shadow: 0 0 20px rgba(0,0,0,1);
+        }
+
+        .input-v12 {
+            background: #050505 !important;
+            border: 1px solid #333 !important;
+            color: var(--hacker) !important;
+            padding: 10px;
+            width: 100%;
+            font-size: 0.8rem;
+        }
+
+        .input-v12:focus { border-color: var(--dz-red) !important; outline: none; }
+
+        .btn-strike {
+            background: linear-gradient(90deg, var(--dz-green), var(--dz-red));
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            padding: 18px;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+            margin-top: 20px;
+        }
+
+        /* --- ID CARD VISUAL --- */
+        .id-card {
+            background: linear-gradient(135deg, #111 0%, #000 100%);
+            border: 2px solid var(--dz-green);
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .id-card::after {
+            content: "CONFIDENTIEL";
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 3rem;
+            color: rgba(255,0,0,0.1);
+            font-weight: 900;
+            pointer-events: none;
+        }
+
+        .result-tag {
+            font-size: 0.6rem;
+            background: #1a1a1a;
+            color: var(--hacker);
+            padding: 2px 6px;
+            border: 1px solid var(--hacker);
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="splash">
+        <div class="flex gap-10 mb-6 text-6xl"><span>🇩🇿</span><span>🇦🇫</span></div>
+        <h1 class="hero-title">HMD-DZ</h1>
+        <p class="tracking-[1.5em] text-xs opacity-50 uppercase">Global Intelligence Access • God Mode</p>
+        <button onclick="unlock()" class="btn-unlock">INITIALISER LE SYSTÈME</button>
+        <div class="mt-20 opacity-20 text-[8px] tracking-[1em]">HMD-DZ V.12 SUPREME EDITION</div>
+    </div>
+
+    <div id="main-dashboard" class="max-w-7xl mx-auto py-10">
+        
+        <header class="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-white/10 pb-8">
+            <div class="flex items-center gap-6">
+                <span class="text-6xl">🇩🇿</span>
+                <div>
+                    <h2 class="text-6xl font-black italic tracking-tighter">HMD-DZ</h2>
+                    <p class="text-xs text-red-600 font-bold uppercase tracking-[0.5em]">Unité de Renseignement Étatique</p>
+                </div>
+            </div>
+            <div class="text-right font-mono text-xs opacity-50">
+                DATE: 2026-04-21<br>
+                TIME: <span id="clock" class="text-white font-bold">00:00:00</span><br>
+                SECURITY: <span class="text-green-500 font-bold">ENCRYPTED</span>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <div class="lg:col-span-3 space-y-6">
+                <div class="panel-v12 p-8 rounded-xl">
+                    <h3 class="text-sm font-bold mb-8 uppercase tracking-widest text-red-600 border-b border-white/5 pb-4">
+                        <i class="fa-solid fa-user-secret mr-3"></i> PARAMÈTRES DE LA CIBLE
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="space-y-4">
+                            <div><span class="text-[10px] opacity-40 uppercase">Prénom</span><input id="in-fn" class="input-v12" placeholder="Ex: Ahmed"></div>
+                            <div><span class="text-[10px] opacity-40 uppercase">Nom de famille</span><input id="in-ln" class="input-v12" placeholder="Ex: Benchaabane"></div>
+                            <div><span class="text-[10px] opacity-40 uppercase">Date de naissance</span><input id="in-dob" class="input-v12" placeholder="JJ/MM/AAAA"></div>
+                            <div><span class="text-[10px] opacity-40 uppercase">Lieu de Naissance</span><input id="in-pob" class="input-v12"></div>
+                        </div>
+                        <div class="space-y-4">
+                            <div><span class="text-[10px] opacity-40 uppercase">Pseudo Unique</span><input id="in-un" class="input-v12" placeholder="@pseudo"></div>
+                            <div><span class="text-[10px] opacity-40 uppercase">Email</span><input id="in-em" class="input-v12" placeholder="mail@gmail.com"></div>
+                            <div><span class="text-[10px] opacity-40 uppercase">Téléphone</span><input id="in-ph" class="input-v12" placeholder="06... / 07..."></div>
+                            <div><span class="text-[10px] opacity-40 uppercase">Ville actuelle</span><input id="in-ci" class="input-v12" placeholder="Alger, Paris..."></div>
+                        </div>
+                        <div class="space-y-4">
+                            <div><span class="text-[10px] opacity-40 uppercase">Adresse / Quartier</span><input id="in-ad" class="input-v12" placeholder="Rue, N°..."></div>
+                            <div><span class="text-[10px] opacity-40 uppercase">Profession</span><input id="in-job" class="input-v12"></div>
+                            <div><span class="text-[10px] opacity-40 uppercase">Plaque Véhicule</span><input id="in-pl" class="input-v12"></div>
+                            <div><span class="text-[10px] opacity-40 uppercase">Indices (Discord, etc.)</span><input id="in-ex" class="input-v12"></div>
+                        </div>
+                    </div>
+
+                    <button onclick="strike()" class="btn-strike">EXÉCUTER L'EXTRACTION GOD-MODE</button>
+                </div>
+
+                <div class="bg-black border border-white/5 p-4 h-32 overflow-y-auto font-mono text-[9px] text-green-500" id="logs">
+                    <div>> SYSTÈME HMD-DZ INITIALISÉ... EN ATTENTE DE COMMANDE.</div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="panel-v12 p-6 min-h-[450px] rounded-xl">
+                    <h3 class="text-xs font-bold mb-6 border-b border-white/5 pb-2 uppercase italic text-red-600">Rapports Cloud</h3>
+                    <div id="results-box" class="space-y-3">
+                        <div class="text-center py-20 opacity-10">
+                            <i class="fa-solid fa-satellite-dish text-6xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="dossier" class="mt-12 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="id-card">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="text-dz-green font-bold text-xs">OFFICIAL DIGITAL ID</span>
+                        <div class="flex gap-2"><span>🇩🇿</span><span>🇦🇫</span></div>
+                    </div>
+                    <div class="flex flex-col items-center mb-6">
+                        <div class="w-32 h-32 bg-zinc-800 border-2 border-dz-green rounded-lg flex items-center justify-center text-5xl mb-4">
+                            <i class="fa-solid fa-user-tie opacity-30"></i>
+                        </div>
+                        <h4 id="res-fullname" class="text-2xl font-black uppercase italic tracking-tighter">NOM PRÉNOM</h4>
+                        <p id="res-username" class="text-red-600 font-bold">@pseudo</p>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="border-b border-white/10 pb-1"><span class="opacity-40 text-[9px] uppercase">Âge estimé:</span> <span id="res-age" class="float-right text-white font-bold">--</span></div>
+                        <div class="border-b border-white/10 pb-1"><span class="opacity-40 text-[9px] uppercase">Lieu de vie:</span> <span id="res-location" class="float-right text-white font-bold">--</span></div>
+                        <div class="border-b border-white/10 pb-1"><span class="opacity-40 text-[9px] uppercase">Nationalité:</span> <span class="float-right text-white font-bold">DZ / AF</span></div>
+                        <div class="border-b border-white/10 pb-1"><span class="opacity-40 text-[9px] uppercase">Niveau de Menace:</span> <span id="res-threat" class="float-right text-red-600 font-bold animate-pulse">--</span></div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 panel-v12 p-8 rounded-xl">
+                    <h3 class="text-xl font-bold mb-8 border-b border-white/5 pb-4"><i class="fa-solid fa-map-location-dot text-dz-green mr-3"></i> EXTRACTION D'ADRESSE & CONTACTS</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div>
+                            <span class="result-tag">Localisation Satellite</span>
+                            <p id="res-address-full" class="text-white font-bold text-lg mb-4 italic">Adresse non extraite.</p>
+                            <div id="map-link-box"></div>
+                            
+                            <div class="mt-6">
+                                <span class="result-tag">Variantes de Mails Déduites</span>
+                                <div id="res-emails" class="font-mono text-xs text-blue-400 space-y-1"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="result-tag">Analyse Professionnelle</span>
+                            <p id="res-job" class="text-white font-bold mb-4">---</p>
+                            
+                            <span class="result-tag">Détails Véhicule</span>
+                            <p id="res-plate" class="text-white font-bold mb-4 uppercase">---</p>
+
+                            <div class="mt-6 p-4 bg-white/5 border border-white/10 rounded">
+                                <span class="text-[9px] font-bold text-dz-red uppercase">Note d'enquêteur HMD-DZ :</span>
+                                <p id="res-intel-note" class="text-[11px] italic opacity-60 mt-2">En attente de scan...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // HORLOGE
+        setInterval(() => {
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+        }, 1000);
+
+        // UNLOCK SYSTEM
+        function unlock() {
+            document.getElementById('splash').style.display = 'none';
+            document.getElementById('main-dashboard').style.display = 'block';
+            addLog("DÉVERROUILLAGE RÉUSSI. ACCÈS GOD-MODE AUTORISÉ.");
+        }
+
+        // LOGGING
+        function addLog(msg) {
+            const l = document.getElementById('logs');
+            l.innerHTML += `<div>[${new Date().toLocaleTimeString()}] > ${msg}</div>`;
+            l.scrollTop = l.scrollHeight;
+        }
+
+        // STRIKE ENGINE (GOD MODE)
+        function strike() {
+            const i = {
+                fn: document.getElementById('in-fn').value.trim(),
+                ln: document.getElementById('in-ln').value.trim(),
+                un: document.getElementById('in-un').value.trim(),
+                dob: document.getElementById('in-dob').value.trim(),
+                ci: document.getElementById('in-ci').value.trim(),
+                ad: document.getElementById('in-ad').value.trim(),
+                em: document.getElementById('in-em').value.trim(),
+                ph: document.getElementById('in-ph').value.trim(),
+                jb: document.getElementById('in-job').value.trim(),
+                pl: document.getElementById('in-pl').value.trim(),
+                ex: document.getElementById('in-ex').value.trim()
+            };
+
+            if(!i.fn && !i.un && !i.em) {
+                alert("ERREUR : Données cibles manquantes.");
+                return;
+            }
+
+            addLog("Lancement de l'extraction intensive...");
+            document.getElementById('dossier').classList.remove('hidden');
+
+            // --- 1. POPULATE ID CARD ---
+            document.getElementById('res-fullname').innerText = `${i.fn} ${i.ln}`.trim() || "INCONNU";
+            document.getElementById('res-username').innerText = i.un ? `@${i.un}` : "AUCUN PSEUDO";
+            document.getElementById('res-location').innerText = i.ci || "MONDE";
+            
+            // Calcul de l'âge
+            if(i.dob && i.dob.includes('/')) {
+                let year = i.dob.split('/').pop();
+                document.getElementById('res-age').innerText = `${2026 - parseInt(year)} ans`;
+            } else { document.getElementById('res-age').innerText = "Non défini"; }
+
+            // Menace
+            document.getElementById('res-threat').innerText = (Object.values(i).filter(v => v != "").length > 6) ? "EXTRÊME" : "ÉLEVÉ";
+
+            // --- 2. EXTRACTION D'ADRESSE ---
+            document.getElementById('res-address-full').innerText = `${i.ad ? i.ad + ', ' : ''}${i.ci || 'Localisation non spécifiée'}`;
+            if(i.ci) {
+                document.getElementById('map-link-box').innerHTML = `<a href="https://www.google.com/maps/search/${encodeURIComponent(i.ad + ' ' + i.ci)}" target="_blank" class="bg-dz-green text-white px-4 py-2 text-xs font-bold rounded inline-block hover:bg-white hover:text-black transition uppercase">[Ouvrir Map Satellite]</a>`;
+            }
+
+            // Emails probables
+            if(i.fn && i.ln) {
+                const mails = [`${i.fn.toLowerCase()}.${i.ln.toLowerCase()}@gmail.com`, `${i.ln.toLowerCase()}${i.fn.toLowerCase()}@yahoo.fr`];
+                document.getElementById('res-emails').innerText = mails.join(' / ');
+            }
+
+            document.getElementById('res-job').innerText = i.jb || "Inconnu";
+            document.getElementById('res-plate').innerText = i.pl || "Pas de véhicule détecté";
+
+            // Note d'enquête
+            document.getElementById('res-intel-note').innerText = `L'individu ${i.fn} semble résider dans la zone de ${i.ci || 'non identifiée'}. Nos rapports suggèrent une activité numérique via ${i.un || 'des comptes secondaires'}. Le recoupement avec les bases de données satellitaires DZ/AF est en cours.`;
+
+            // --- 3. GÉNÉRATION DES LIENS (CLOUD REPORTS) ---
+            const resArea = document.getElementById('results-box');
+            resArea.innerHTML = "";
+            let links = [];
+
+            if(i.fn || i.ln) {
+                links.push({t: "Dossier Identité (Google)", l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+${i.ci}`});
+                links.push({t: "Localisation (PagesBlanches)", l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+adresse+${i.ci}`});
+                links.push({t: "Recherche de Sociétés/Job", l: `https://www.google.com/search?q=site:societe.com+OR+site:linkedin.com+"${i.fn}+${i.ln}"`});
+            }
+            if(i.un) {
+                links.push({t: "Instagram / Snap Tracker", l: `https://www.google.com/search?q=site:instagram.com+OR+site:snapchat.com+"${i.un}"`});
+                links.push({t: "TikTok Intelligence", l: `https://www.tiktok.com/@${i.un}`});
+            }
+            if(i.em) links.push({t: "Email Tracker (Epieos)", l: `https://epieos.com/?q=${i.em}`});
+            if(i.pl) links.push({t: "Rapport Plaque Véhicule", l: `https://www.google.com/search?q="${i.pl}"`});
+            
+            // Nouveau : Recherche de documents (Fiches, listes...)
+            if(i.ln) links.push({t: "Documents Publics (PDF/Doc)", l: `https://www.google.com/search?q="${i.ln}"+filetype:pdf`});
+
+            links.forEach(l => {
+                resArea.innerHTML += `
+                    <a href="${l.l}" target="_blank" class="block bg-white text-black p-3 rounded font-bold hover:bg-dz-green hover:text-white transition text-[10px] flex justify-between items-center">
+                        <span>${l.t}</span> <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                    </a>
+                `;
+            });
+
+            addLog("STRIKE TERMINÉ. DOSSIER DISPONIBLE.");
+            document.getElementById('dossier').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
