@@ -3,130 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMD-DZ | GOD-MODE OSINT</title>
+    <title>HMD-DZ | THE ORACLE v13</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Share+Tech+Mono&display=swap');
-
-        :root {
-            --dz-green: #006233;
-            --dz-red: #d21034;
-            --hacker: #00ff41;
+        
+        :root { 
+            --dz-green: #006233; 
+            --dz-red: #d21034; 
+            --hacker: #00ff41; 
         }
 
-        body {
-            font-family: 'Share Tech Mono', monospace;
-            background: #000;
-            color: #fff;
-            margin: 0;
-            overflow-x: hidden;
+        body { 
+            font-family: 'Share Tech Mono', monospace; 
+            background: #000; 
+            color: #fff; 
+            margin: 0; 
+            overflow-x: hidden; 
         }
 
-        /* --- SPLASH SCREEN --- */
-        #splash {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* --- SPLASH SCREEN (ACCÈS) --- */
+        #splash { 
+            position: fixed; 
+            inset: 0; 
+            background: #000; 
+            z-index: 10000; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
         }
 
-        .hero-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 900;
-            background: linear-gradient(to right, var(--dz-green), #fff, var(--dz-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(0,255,65,0.4));
+        .hero-title { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: clamp(3rem, 10vw, 8rem); 
+            font-weight: 900; 
+            background: linear-gradient(to right, var(--dz-green), #fff, var(--dz-red)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            filter: drop-shadow(0 0 20px rgba(0,255,65,0.4)); 
         }
 
-        .btn-unlock {
-            margin-top: 40px;
-            padding: 20px 80px;
-            border: 2px solid var(--dz-green);
-            background: transparent;
-            color: #fff;
-            font-weight: bold;
-            letter-spacing: 5px;
-            cursor: pointer;
-            transition: 0.5s;
+        .btn-unlock { 
+            margin-top: 40px; 
+            padding: 20px 80px; 
+            border: 2px solid var(--dz-green); 
+            background: transparent; 
+            color: #fff; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.5s; 
+            letter-spacing: 5px; 
+            text-transform: uppercase;
         }
 
-        .btn-unlock:hover {
-            background: var(--dz-green);
-            box-shadow: 0 0 50px var(--dz-green);
-            transform: scale(1.1);
+        .btn-unlock:hover { 
+            background: var(--dz-green); 
+            box-shadow: 0 0 50px var(--dz-green); 
+            transform: scale(1.1); 
         }
 
-        /* --- MAIN DASHBOARD --- */
-        #main-dashboard {
-            display: none;
-            padding: 20px;
+        /* --- INTERFACE PRINCIPALE --- */
+        #main-app { 
+            display: none; 
+            padding: 20px; 
         }
 
-        .panel-v12 {
-            background: rgba(10, 10, 10, 0.95);
-            border: 1px solid #222;
-            border-left: 5px solid var(--dz-green);
-            box-shadow: 0 0 20px rgba(0,0,0,1);
+        .panel-intel { 
+            background: rgba(10, 10, 10, 0.95); 
+            border: 1px solid #222; 
+            border-left: 5px solid var(--dz-green); 
         }
 
-        .input-v12 {
-            background: #050505 !important;
-            border: 1px solid #333 !important;
-            color: var(--hacker) !important;
-            padding: 10px;
-            width: 100%;
-            font-size: 0.8rem;
+        .input-intel { 
+            background: #050505 !important; 
+            border: 1px solid #333 !important; 
+            color: var(--hacker) !important; 
+            padding: 10px; 
+            width: 100%; 
+            font-size: 0.8rem; 
+            border-radius: 4px; 
         }
 
-        .input-v12:focus { border-color: var(--dz-red) !important; outline: none; }
-
-        .btn-strike {
-            background: linear-gradient(90deg, var(--dz-green), var(--dz-red));
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            padding: 18px;
-            width: 100%;
-            cursor: pointer;
-            border: none;
-            margin-top: 20px;
+        .input-intel:focus { 
+            border-color: var(--dz-red) !important; 
+            outline: none; 
         }
 
-        /* --- ID CARD VISUAL --- */
-        .id-card {
-            background: linear-gradient(135deg, #111 0%, #000 100%);
-            border: 2px solid var(--dz-green);
-            border-radius: 15px;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
+        .btn-strike { 
+            background: linear-gradient(90deg, var(--dz-green), var(--dz-red)); 
+            font-family: 'Orbitron', sans-serif; 
+            font-weight: 900; 
+            padding: 18px; 
+            width: 100%; 
+            cursor: pointer; 
+            border: none; 
+            margin-top: 20px; 
+            text-transform: uppercase; 
+        }
+        
+        /* --- STYLE DU RAPPORT --- */
+        .id-card { 
+            background: linear-gradient(135deg, #111 0%, #000 100%); 
+            border: 2px solid var(--dz-green); 
+            border-radius: 15px; 
+            padding: 20px; 
+            position: relative; 
         }
 
-        .id-card::after {
-            content: "CONFIDENTIEL";
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 3rem;
-            color: rgba(255,0,0,0.1);
-            font-weight: 900;
-            pointer-events: none;
+        .result-tag { 
+            font-size: 0.6rem; 
+            background: #1a1a1a; 
+            color: var(--hacker); 
+            padding: 2px 6px; 
+            border: 1px solid var(--hacker); 
+            margin-bottom: 5px; 
+            display: inline-block; 
+            text-transform: uppercase; 
         }
 
-        .result-tag {
-            font-size: 0.6rem;
-            background: #1a1a1a;
-            color: var(--hacker);
-            padding: 2px 6px;
-            border: 1px solid var(--hacker);
-            margin-bottom: 5px;
-            display: inline-block;
+        .cloud-link { 
+            background: #fff; 
+            color: #000; 
+            padding: 12px; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            text-decoration: none; 
+            margin-bottom: 8px; 
+            font-size: 0.75rem; 
+            transition: 0.3s; 
+        }
+
+        .cloud-link:hover { 
+            transform: scale(1.02) translateX(5px); 
+            background: var(--dz-green); 
+            color: #fff; 
         }
     </style>
 </head>
@@ -135,240 +150,245 @@
     <div id="splash">
         <div class="flex gap-10 mb-6 text-6xl"><span>🇩🇿</span><span>🇦🇫</span></div>
         <h1 class="hero-title">HMD-DZ</h1>
-        <p class="tracking-[1.5em] text-xs opacity-50 uppercase">Global Intelligence Access • God Mode</p>
-        <button onclick="unlock()" class="btn-unlock">INITIALISER LE SYSTÈME</button>
-        <div class="mt-20 opacity-20 text-[8px] tracking-[1em]">HMD-DZ V.12 SUPREME EDITION</div>
+        <p class="tracking-[1.5em] text-xs opacity-50 uppercase">Global Extraction Terminal • v13 THE ORACLE</p>
+        <button onclick="boot()" class="btn-unlock">Initialiser l'accès</button>
     </div>
 
-    <div id="main-dashboard" class="max-w-7xl mx-auto py-10">
+    <div id="main-app" class="max-w-7xl mx-auto py-10">
         
-        <header class="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-white/10 pb-8">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-white/10 pb-8 text-center md:text-left">
             <div class="flex items-center gap-6">
                 <span class="text-6xl">🇩🇿</span>
                 <div>
-                    <h2 class="text-6xl font-black italic tracking-tighter">HMD-DZ</h2>
-                    <p class="text-xs text-red-600 font-bold uppercase tracking-[0.5em]">Unité de Renseignement Étatique</p>
+                    <h2 class="text-6xl font-black italic tracking-tighter leading-none">HMD-DZ</h2>
+                    <p class="text-xs text-red-600 font-bold uppercase tracking-[0.5em]">Supreme Investigation System</p>
                 </div>
             </div>
-            <div class="text-right font-mono text-xs opacity-50">
-                DATE: 2026-04-21<br>
-                TIME: <span id="clock" class="text-white font-bold">00:00:00</span><br>
-                SECURITY: <span class="text-green-500 font-bold">ENCRYPTED</span>
+            <div class="mt-4 md:mt-0 glass p-5 rounded border border-white/10 text-[10px] font-mono text-right">
+                STATUS: <span class="text-green-500 font-bold">GOD_MODE_ACTIVE</span><br>
+                TIME: <span id="clock" class="text-white">00:00:00</span>
             </div>
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
             
             <div class="lg:col-span-3 space-y-6">
-                <div class="panel-v12 p-8 rounded-xl">
-                    <h3 class="text-sm font-bold mb-8 uppercase tracking-widest text-red-600 border-b border-white/5 pb-4">
-                        <i class="fa-solid fa-user-secret mr-3"></i> PARAMÈTRES DE LA CIBLE
+                <div class="panel-intel p-8 rounded-xl">
+                    <h3 class="text-xs font-bold mb-8 uppercase tracking-[0.3em] text-red-600 border-b border-white/5 pb-4">
+                        <i class="fa-solid fa-crosshairs mr-3"></i> PARAMÈTRES DE CIBLAGE (EXTRACTION TOTALE)
                     </h3>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="space-y-4">
-                            <div><span class="text-[10px] opacity-40 uppercase">Prénom</span><input id="in-fn" class="input-v12" placeholder="Ex: Ahmed"></div>
-                            <div><span class="text-[10px] opacity-40 uppercase">Nom de famille</span><input id="in-ln" class="input-v12" placeholder="Ex: Benchaabane"></div>
-                            <div><span class="text-[10px] opacity-40 uppercase">Date de naissance</span><input id="in-dob" class="input-v12" placeholder="JJ/MM/AAAA"></div>
-                            <div><span class="text-[10px] opacity-40 uppercase">Lieu de Naissance</span><input id="in-pob" class="input-v12"></div>
-                        </div>
-                        <div class="space-y-4">
-                            <div><span class="text-[10px] opacity-40 uppercase">Pseudo Unique</span><input id="in-un" class="input-v12" placeholder="@pseudo"></div>
-                            <div><span class="text-[10px] opacity-40 uppercase">Email</span><input id="in-em" class="input-v12" placeholder="mail@gmail.com"></div>
-                            <div><span class="text-[10px] opacity-40 uppercase">Téléphone</span><input id="in-ph" class="input-v12" placeholder="06... / 07..."></div>
-                            <div><span class="text-[10px] opacity-40 uppercase">Ville actuelle</span><input id="in-ci" class="input-v12" placeholder="Alger, Paris..."></div>
-                        </div>
-                        <div class="space-y-4">
-                            <div><span class="text-[10px] opacity-40 uppercase">Adresse / Quartier</span><input id="in-ad" class="input-v12" placeholder="Rue, N°..."></div>
-                            <div><span class="text-[10px] opacity-40 uppercase">Profession</span><input id="in-job" class="input-v12"></div>
-                            <div><span class="text-[10px] opacity-40 uppercase">Plaque Véhicule</span><input id="in-pl" class="input-v12"></div>
-                            <div><span class="text-[10px] opacity-40 uppercase">Indices (Discord, etc.)</span><input id="in-ex" class="input-v12"></div>
-                        </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Prénom</label><input id="i-fn" class="input-intel" placeholder="Ahmed"></div>
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Nom de famille</label><input id="i-ln" class="input-intel" placeholder="Benchaabane"></div>
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Pseudo (Username)</label><input id="i-un" class="input-intel" placeholder="@pseudo"></div>
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Date Naissance</label><input id="i-dob" class="input-intel" placeholder="JJ/MM/AAAA"></div>
+                        
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Ville / Pays</label><input id="i-ci" class="input-intel" placeholder="Alger, Paris..."></div>
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Quartier / Adresse</label><input id="i-ad" class="input-intel"></div>
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Nom du Père</label><input id="i-fat" class="input-intel"></div>
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Numéro Tél</label><input id="i-ph" class="input-intel"></div>
+                        
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Email</label><input id="i-em" class="input-intel"></div>
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Profession</label><input id="i-job" class="input-intel"></div>
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Plaque Véhicule</label><input id="i-pl" class="input-intel"></div>
+                        <div><label class="text-[9px] opacity-40 uppercase mb-1 block">Indices Suppl.</label><input id="i-ex" class="input-intel" placeholder="ID Discord, Snapchat..."></div>
                     </div>
 
-                    <button onclick="strike()" class="btn-strike">EXÉCUTER L'EXTRACTION GOD-MODE</button>
+                    <button onclick="strike()" class="btn-strike tracking-[1em]">Exécuter la traque</button>
                 </div>
 
                 <div class="bg-black border border-white/5 p-4 h-32 overflow-y-auto font-mono text-[9px] text-green-500" id="logs">
-                    <div>> SYSTÈME HMD-DZ INITIALISÉ... EN ATTENTE DE COMMANDE.</div>
+                    <div>> INITIALISATION DU NOYAU ORACLE v13... PRÊT.</div>
                 </div>
             </div>
 
             <div class="space-y-6">
-                <div class="panel-v12 p-6 min-h-[450px] rounded-xl">
-                    <h3 class="text-xs font-bold mb-6 border-b border-white/5 pb-2 uppercase italic text-red-600">Rapports Cloud</h3>
-                    <div id="results-box" class="space-y-3">
+                <div class="panel-intel p-6 min-h-[500px] rounded-xl">
+                    <h3 class="text-xs font-bold mb-6 border-b border-white/5 pb-2 uppercase text-red-600 italic">Rapports Cloud</h3>
+                    <div id="results-box" class="space-y-2">
                         <div class="text-center py-20 opacity-10">
                             <i class="fa-solid fa-satellite-dish text-6xl"></i>
+                            <p class="text-[8px] mt-4 uppercase">Aucune donnée chargée</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="dossier" class="mt-12 hidden">
+        <div id="dossier" class="mt-12 hidden pb-20">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
                 <div class="id-card">
                     <div class="flex justify-between items-start mb-6">
-                        <span class="text-dz-green font-bold text-xs">OFFICIAL DIGITAL ID</span>
+                        <span class="text-dz-green font-bold text-[9px] uppercase">Official Dossier #HMD-V13</span>
                         <div class="flex gap-2"><span>🇩🇿</span><span>🇦🇫</span></div>
                     </div>
                     <div class="flex flex-col items-center mb-6">
-                        <div class="w-32 h-32 bg-zinc-800 border-2 border-dz-green rounded-lg flex items-center justify-center text-5xl mb-4">
-                            <i class="fa-solid fa-user-tie opacity-30"></i>
+                        <div class="w-32 h-32 bg-zinc-900 border-2 border-dz-green rounded-lg flex items-center justify-center text-5xl mb-4 relative overflow-hidden">
+                            <i class="fa-solid fa-user-secret opacity-20"></i>
+                            <div class="absolute inset-0 bg-gradient-to-t from-green-900/40 to-transparent"></div>
                         </div>
-                        <h4 id="res-fullname" class="text-2xl font-black uppercase italic tracking-tighter">NOM PRÉNOM</h4>
+                        <h4 id="res-fullname" class="text-2xl font-black uppercase tracking-tighter">NOM PRÉNOM</h4>
                         <p id="res-username" class="text-red-600 font-bold">@pseudo</p>
                     </div>
-                    <div class="space-y-3 text-sm">
-                        <div class="border-b border-white/10 pb-1"><span class="opacity-40 text-[9px] uppercase">Âge estimé:</span> <span id="res-age" class="float-right text-white font-bold">--</span></div>
-                        <div class="border-b border-white/10 pb-1"><span class="opacity-40 text-[9px] uppercase">Lieu de vie:</span> <span id="res-location" class="float-right text-white font-bold">--</span></div>
-                        <div class="border-b border-white/10 pb-1"><span class="opacity-40 text-[9px] uppercase">Nationalité:</span> <span class="float-right text-white font-bold">DZ / AF</span></div>
-                        <div class="border-b border-white/10 pb-1"><span class="opacity-40 text-[9px] uppercase">Niveau de Menace:</span> <span id="res-threat" class="float-right text-red-600 font-bold animate-pulse">--</span></div>
+                    <div class="space-y-2 text-[11px] font-mono">
+                        <div class="flex justify-between border-b border-white/5 pb-1"><span class="opacity-40 uppercase">ÂGE ESTIMÉ:</span> <span id="res-age" class="text-white font-bold">--</span></div>
+                        <div class="flex justify-between border-b border-white/5 pb-1"><span class="opacity-40 uppercase">ZONE DE VIE:</span> <span id="res-location" class="text-white font-bold">--</span></div>
+                        <div class="flex justify-between border-b border-white/5 pb-1"><span class="opacity-40 uppercase">FILIATION:</span> <span id="res-parents" class="text-white font-bold">--</span></div>
+                        <div class="flex justify-between border-b border-white/5 pb-1"><span class="opacity-40 uppercase">RISQUE:</span> <span class="text-red-600 font-bold">VERROUILLÉ</span></div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-2 panel-v12 p-8 rounded-xl">
-                    <h3 class="text-xl font-bold mb-8 border-b border-white/5 pb-4"><i class="fa-solid fa-map-location-dot text-dz-green mr-3"></i> EXTRACTION D'ADRESSE & CONTACTS</h3>
+                <div class="lg:col-span-2 panel-intel p-8 rounded-xl">
+                    <h3 class="text-xl font-bold mb-6 border-b border-white/5 pb-4"><i class="fa-solid fa-microscope text-dz-green mr-3"></i> ANALYSE DÉTAILLÉE</h3>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <span class="result-tag">Localisation Satellite</span>
-                            <p id="res-address-full" class="text-white font-bold text-lg mb-4 italic">Adresse non extraite.</p>
-                            <div id="map-link-box"></div>
+                            <span class="result-tag">Géolocalisation Satellite</span>
+                            <p id="res-address-full" class="text-white font-bold text-md mb-2 italic">Non identifiée.</p>
+                            <div id="map-link-box" class="mb-6"></div>
                             
-                            <div class="mt-6">
-                                <span class="result-tag">Variantes de Mails Déduites</span>
-                                <div id="res-emails" class="font-mono text-xs text-blue-400 space-y-1"></div>
-                            </div>
+                            <span class="result-tag">Empreinte Mail Déduite</span>
+                            <div id="res-emails" class="font-mono text-[10px] text-blue-400 space-y-1 mb-6"></div>
+
+                            <span class="result-tag">Reconnaissance Faciale (Pivots)</span>
+                            <div id="face-pivots" class="grid grid-cols-2 gap-2 mt-2"></div>
                         </div>
 
                         <div>
-                            <span class="result-tag">Analyse Professionnelle</span>
-                            <p id="res-job" class="text-white font-bold mb-4">---</p>
-                            
-                            <span class="result-tag">Détails Véhicule</span>
-                            <p id="res-plate" class="text-white font-bold mb-4 uppercase">---</p>
+                            <span class="result-tag">Niveau de Vulnérabilité</span>
+                            <div class="w-full bg-zinc-900 h-2 rounded-full mb-4"><div id="vuln-bar" class="h-full bg-red-600 rounded-full transition-all duration-1000" style="width: 0%"></div></div>
 
-                            <div class="mt-6 p-4 bg-white/5 border border-white/10 rounded">
-                                <span class="text-[9px] font-bold text-dz-red uppercase">Note d'enquêteur HMD-DZ :</span>
-                                <p id="res-intel-note" class="text-[11px] italic opacity-60 mt-2">En attente de scan...</p>
-                            </div>
+                            <span class="result-tag">Synthèse d'Investigation</span>
+                            <p id="res-intel-note" class="text-[10px] italic opacity-60 leading-relaxed mb-6"></p>
+
+                            <span class="result-tag">Plateformes de Services</span>
+                            <div id="finance-pivots" class="grid grid-cols-2 gap-2 mt-2"></div>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-
     </div>
 
     <script>
-        // HORLOGE
-        setInterval(() => {
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString();
-        }, 1000);
+        // HORLOGE TEMPS RÉEL
+        setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
 
-        // UNLOCK SYSTEM
-        function unlock() {
+        // FONCTION D'ENTRÉE
+        function boot() {
             document.getElementById('splash').style.display = 'none';
-            document.getElementById('main-dashboard').style.display = 'block';
-            addLog("DÉVERROUILLAGE RÉUSSI. ACCÈS GOD-MODE AUTORISÉ.");
+            document.getElementById('main-app').style.display = 'block';
+            addLog("SYSTÈME DÉVERROUILLÉ. ACCÈS HMD-DZ v13 AUTORISÉ.");
         }
 
-        // LOGGING
+        // SYSTÈME DE LOG
         function addLog(msg) {
             const l = document.getElementById('logs');
             l.innerHTML += `<div>[${new Date().toLocaleTimeString()}] > ${msg}</div>`;
             l.scrollTop = l.scrollHeight;
         }
 
-        // STRIKE ENGINE (GOD MODE)
+        // MOTEUR D'EXTRACTION
         function strike() {
             const i = {
-                fn: document.getElementById('in-fn').value.trim(),
-                ln: document.getElementById('in-ln').value.trim(),
-                un: document.getElementById('in-un').value.trim(),
-                dob: document.getElementById('in-dob').value.trim(),
-                ci: document.getElementById('in-ci').value.trim(),
-                ad: document.getElementById('in-ad').value.trim(),
-                em: document.getElementById('in-em').value.trim(),
-                ph: document.getElementById('in-ph').value.trim(),
-                jb: document.getElementById('in-job').value.trim(),
-                pl: document.getElementById('in-pl').value.trim(),
-                ex: document.getElementById('in-ex').value.trim()
+                fn: document.getElementById('i-fn').value.trim(),
+                ln: document.getElementById('i-ln').value.trim(),
+                un: document.getElementById('i-un').value.trim().replace('@', ''),
+                dob: document.getElementById('i-dob').value.trim(),
+                fat: document.getElementById('i-fat').value.trim(),
+                ci: document.getElementById('i-ci').value.trim(),
+                ad: document.getElementById('i-ad').value.trim(),
+                em: document.getElementById('i-em').value.trim(),
+                ph: document.getElementById('i-ph').value.trim(),
+                jb: document.getElementById('i-job').value.trim(),
+                pl: document.getElementById('i-pl').value.trim(),
+                ex: document.getElementById('i-ex').value.trim()
             };
 
-            if(!i.fn && !i.un && !i.em) {
-                alert("ERREUR : Données cibles manquantes.");
-                return;
+            if(!i.fn && !i.un && !i.em) { 
+                alert("ERREUR : Informations insuffisantes pour le scan."); 
+                return; 
             }
 
-            addLog("Lancement de l'extraction intensive...");
+            addLog(`SCAN GLOBAL LANCÉ SUR : ${i.fn || i.un}...`);
             document.getElementById('dossier').classList.remove('hidden');
 
-            // --- 1. POPULATE ID CARD ---
-            document.getElementById('res-fullname').innerText = `${i.fn} ${i.ln}`.trim() || "INCONNU";
+            // --- 1. REMPLISSAGE ID CARD ---
+            document.getElementById('res-fullname').innerText = `${i.fn} ${i.ln}`.trim() || "CIBLE INCONNUE";
             document.getElementById('res-username').innerText = i.un ? `@${i.un}` : "AUCUN PSEUDO";
-            document.getElementById('res-location').innerText = i.ci || "MONDE";
+            document.getElementById('res-location').innerText = i.ci || "ZONE MONDIALE";
+            document.getElementById('res-parents').innerText = i.fat || "--";
             
-            // Calcul de l'âge
             if(i.dob && i.dob.includes('/')) {
                 let year = i.dob.split('/').pop();
-                document.getElementById('res-age').innerText = `${2026 - parseInt(year)} ans`;
-            } else { document.getElementById('res-age').innerText = "Non défini"; }
+                document.getElementById('res-age').innerText = `${2026 - parseInt(year)} ANS ENV.`;
+            } else { document.getElementById('res-age').innerText = "INDÉTERMINÉ"; }
 
-            // Menace
-            document.getElementById('res-threat').innerText = (Object.values(i).filter(v => v != "").length > 6) ? "EXTRÊME" : "ÉLEVÉ";
+            // Barre de vulnérabilité
+            let filledFields = Object.values(i).filter(v => v != "").length;
+            document.getElementById('vuln-bar').style.width = (filledFields * 8) + "%";
 
-            // --- 2. EXTRACTION D'ADRESSE ---
-            document.getElementById('res-address-full').innerText = `${i.ad ? i.ad + ', ' : ''}${i.ci || 'Localisation non spécifiée'}`;
+            // --- 2. ADRESSE ET MAPS ---
+            document.getElementById('res-address-full').innerText = `${i.ad ? i.ad + ', ' : ''}${i.ci || 'Coordonnées non saisies'}`;
             if(i.ci) {
-                document.getElementById('map-link-box').innerHTML = `<a href="https://www.google.com/maps/search/${encodeURIComponent(i.ad + ' ' + i.ci)}" target="_blank" class="bg-dz-green text-white px-4 py-2 text-xs font-bold rounded inline-block hover:bg-white hover:text-black transition uppercase">[Ouvrir Map Satellite]</a>`;
+                document.getElementById('map-link-box').innerHTML = `<a href="https://www.google.com/maps/search/${encodeURIComponent(i.ad + ' ' + i.ci)}" target="_blank" class="bg-dz-green text-white px-4 py-2 text-[10px] font-bold rounded block text-center hover:bg-white hover:text-black transition uppercase">[Visualisation Satellite]</a>`;
             }
 
-            // Emails probables
+            // Génération Mails Probables
             if(i.fn && i.ln) {
-                const mails = [`${i.fn.toLowerCase()}.${i.ln.toLowerCase()}@gmail.com`, `${i.ln.toLowerCase()}${i.fn.toLowerCase()}@yahoo.fr`];
+                const mails = [`${i.fn.toLowerCase()}.${i.ln.toLowerCase()}@gmail.com`, `${i.ln.toLowerCase()}${i.fn.toLowerCase()}@outlook.com`];
                 document.getElementById('res-emails').innerText = mails.join(' / ');
             }
 
-            document.getElementById('res-job').innerText = i.jb || "Inconnu";
-            document.getElementById('res-plate').innerText = i.pl || "Pas de véhicule détecté";
+            // Synthèse
+            document.getElementById('res-intel-note').innerText = `L'individu ${i.fn || i.un} fait l'objet d'un profilage intensif. Empreinte numérique ${filledFields > 6 ? 'critique' : 'partielle'}. Utilisation probable de services financiers via le pseudonyme principal. Recherche recommandée dans les registres PDF publics.`;
 
-            // Note d'enquête
-            document.getElementById('res-intel-note').innerText = `L'individu ${i.fn} semble résider dans la zone de ${i.ci || 'non identifiée'}. Nos rapports suggèrent une activité numérique via ${i.un || 'des comptes secondaires'}. Le recoupement avec les bases de données satellitaires DZ/AF est en cours.`;
-
-            // --- 3. GÉNÉRATION DES LIENS (CLOUD REPORTS) ---
+            // --- 3. GÉNÉRATION DES LIENS CLOUD ---
             const resArea = document.getElementById('results-box');
             resArea.innerHTML = "";
             let links = [];
 
             if(i.fn || i.ln) {
                 links.push({t: "Dossier Identité (Google)", l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+${i.ci}`});
-                links.push({t: "Localisation (PagesBlanches)", l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+adresse+${i.ci}`});
-                links.push({t: "Recherche de Sociétés/Job", l: `https://www.google.com/search?q=site:societe.com+OR+site:linkedin.com+"${i.fn}+${i.ln}"`});
+                links.push({t: "Localisation (Annuaire)", l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+adresse+${i.ci}`});
+                links.push({t: "Réseaux Sociaux (Général)", l: `https://www.google.com/search?q=site:facebook.com+OR+site:instagram.com+OR+site:linkedin.com+"${i.fn}+${i.ln}"`});
+                links.push({t: "Fichiers PDF (CV, Diplômes)", l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+filetype:pdf`});
             }
             if(i.un) {
-                links.push({t: "Instagram / Snap Tracker", l: `https://www.google.com/search?q=site:instagram.com+OR+site:snapchat.com+"${i.un}"`});
-                links.push({t: "TikTok Intelligence", l: `https://www.tiktok.com/@${i.un}`});
+                links.push({t: "Instagram Search", l: `https://www.google.com/search?q=site:instagram.com+"${i.un}"`});
+                links.push({t: "TikTok Intel", l: `https://www.tiktok.com/@${i.un}`});
+                links.push({t: "Snapchat Discovery", l: `https://www.snapchat.com/add/${i.un}`});
+                links.push({t: "Archives (Wayback Machine)", l: `https://web.archive.org/web/*/${i.un}`});
             }
-            if(i.em) links.push({t: "Email Tracker (Epieos)", l: `https://epieos.com/?q=${i.em}`});
-            if(i.pl) links.push({t: "Rapport Plaque Véhicule", l: `https://www.google.com/search?q="${i.pl}"`});
-            
-            // Nouveau : Recherche de documents (Fiches, listes...)
-            if(i.ln) links.push({t: "Documents Publics (PDF/Doc)", l: `https://www.google.com/search?q="${i.ln}"+filetype:pdf`});
+            if(i.em) links.push({t: "Tracker Email (Epieos)", l: `https://epieos.com/?q=${i.em}`});
+            if(i.pl) links.push({t: "Historique Plaque", l: `https://www.google.com/search?q="${i.pl}"`});
 
             links.forEach(l => {
                 resArea.innerHTML += `
-                    <a href="${l.l}" target="_blank" class="block bg-white text-black p-3 rounded font-bold hover:bg-dz-green hover:text-white transition text-[10px] flex justify-between items-center">
-                        <span>${l.t}</span> <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                    <a href="${l.l}" target="_blank" class="cloud-link">
+                        <span>${l.t}</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                 `;
             });
 
-            addLog("STRIKE TERMINÉ. DOSSIER DISPONIBLE.");
+            // --- 4. PIVOTS EXTERNES ---
+            const faceBox = document.getElementById('face-pivots');
+            faceBox.innerHTML = `
+                <a href="https://facecheck.id/" target="_blank" class="bg-red-900/20 border border-red-600 p-2 text-[8px] text-center uppercase font-bold hover:bg-red-600 transition">FaceCheck.ID</a>
+                <a href="https://pimeyes.com/" target="_blank" class="bg-red-900/20 border border-red-600 p-2 text-[8px] text-center uppercase font-bold hover:bg-red-600 transition">PimEyes</a>
+            `;
+
+            const finBox = document.getElementById('finance-pivots');
+            const unCheck = i.un || (i.fn + i.ln).toLowerCase();
+            finBox.innerHTML = `
+                <a href="https://www.paypal.com/paypalme/${unCheck}" target="_blank" class="bg-blue-900/20 border border-blue-600 p-2 text-[8px] text-center uppercase font-bold hover:bg-blue-600 transition">PayPal.ME</a>
+                <a href="https://www.vinted.fr/member/${unCheck}" target="_blank" class="bg-teal-900/20 border border-teal-600 p-2 text-[8px] text-center uppercase font-bold hover:bg-teal-600 transition">Vinted Account</a>
+            `;
+
+            addLog("EXTRACTION ORACLE V13 TERMINÉE. RAPPORT GÉNÉRÉ.");
             document.getElementById('dossier').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
