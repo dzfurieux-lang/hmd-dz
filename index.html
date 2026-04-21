@@ -3,37 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMD-DZ | THE COLLECTOR v16</title>
+    <title>HMD-DZ | THE CORE v17</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap');
         :root { --dz-green: #006233; --dz-red: #d21034; --hacker: #00ff41; }
         body { font-family: 'Share Tech Mono', monospace; background: #000; color: #fff; margin: 0; overflow-x: hidden; }
 
-        /* --- SPLASH SCREEN --- */
-        #splash { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        /* --- SPLASH SCREEN (INFAILLIBLE) --- */
+        #splash { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 4px solid var(--dz-green); }
         .hero-title { font-family: 'Orbitron', sans-serif; font-size: clamp(3rem, 10vw, 8rem); font-weight: 900; background: linear-gradient(to right, var(--dz-green), #fff, var(--dz-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(0,255,65,0.4)); }
-        .btn-unlock { margin-top: 40px; padding: 20px 80px; border: 2px solid var(--dz-green); background: transparent; color: #fff; font-weight: bold; cursor: pointer; transition: 0.5s; letter-spacing: 5px; text-transform: uppercase; }
-        .btn-unlock:hover { background: var(--dz-green); box-shadow: 0 0 50px var(--dz-green); transform: scale(1.1); }
+        .btn-unlock { margin-top: 40px; padding: 20px 80px; background: white; color: black; font-weight: 900; cursor: pointer; border: none; letter-spacing: 5px; text-transform: uppercase; }
+        .btn-unlock:hover { background: var(--dz-green); color: white; box-shadow: 0 0 50px var(--dz-green); }
 
-        /* --- UI ELEMENTS --- */
+        /* --- DASHBOARD --- */
         #main-app { display: none; padding: 20px; }
-        .panel-glass { background: rgba(10, 10, 10, 0.95); border: 1px solid #222; border-left: 5px solid var(--dz-green); box-shadow: 0 15px 35px rgba(0,0,0,0.8); }
-        .input-tech { background: #000 !important; border: 1px solid #333 !important; color: var(--hacker) !important; padding: 10px; width: 100%; font-size: 0.75rem; border-radius: 2px; }
-        .input-tech:focus { border-color: var(--dz-red) !important; outline: none; }
-        .label-tech { font-size: 0.6rem; color: #666; text-transform: uppercase; font-weight: bold; margin-bottom: 2px; display: block; }
-
-        .btn-strike { background: linear-gradient(90deg, var(--dz-green), var(--dz-red)); font-family: 'Orbitron', sans-serif; font-weight: 900; padding: 20px; width: 100%; cursor: pointer; border: none; margin-top: 20px; text-transform: uppercase; }
+        .panel-tech { background: rgba(10, 10, 10, 0.95); border: 1px solid #333; border-left: 5px solid var(--dz-green); }
+        .input-tech { background: #000 !important; border: 1px solid #444 !important; color: var(--hacker) !important; padding: 12px; width: 100%; font-size: 0.8rem; border-radius: 4px; }
+        .btn-strike { background: linear-gradient(90deg, var(--dz-green), var(--dz-red)); font-family: 'Orbitron', sans-serif; font-weight: 900; padding: 20px; width: 100%; cursor: pointer; border: none; margin-top: 20px; text-transform: uppercase; letter-spacing: 2px; }
         
-        /* --- LIST SELECTOR --- */
-        .selector-box { background: #080808; border: 1px solid #222; padding: 20px; border-radius: 8px; }
-        .selector-item { background: #fff; color: #000; padding: 12px; border-radius: 6px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; text-decoration: none; font-size: 0.7rem; transition: 0.3s; margin-bottom: 8px; border-left: 6px solid var(--dz-red); }
-        .selector-item:hover { transform: translateX(10px); background: var(--dz-red); color: #fff; }
-
-        /* --- DATA DISPLAYER --- */
-        .data-val { color: #fff; font-size: 1.1rem; font-weight: bold; border-bottom: 1px solid #222; padding-bottom: 4px; }
-        .data-label { color: var(--dz-green); font-size: 0.65rem; font-weight: bold; text-transform: uppercase; margin-top: 10px; }
+        /* --- RESULTS --- */
+        .data-card { background: #080808; border: 1px solid #222; padding: 20px; border-radius: 8px; }
+        .link-item { background: #fff; color: #000; padding: 12px; border-radius: 6px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; text-decoration: none; font-size: 0.7rem; margin-bottom: 8px; border-left: 6px solid var(--dz-red); transition: 0.3s; }
+        .link-item:hover { transform: translateX(10px); background: var(--dz-red); color: #fff; }
+        .label-val { color: var(--dz-green); font-size: 0.6rem; font-weight: bold; text-transform: uppercase; }
+        .text-val { color: #fff; font-size: 1.1rem; font-weight: bold; border-bottom: 1px solid #222; padding-bottom: 4px; display: block; }
     </style>
 </head>
 <body>
@@ -41,8 +36,8 @@
     <div id="splash">
         <div class="flex gap-10 mb-6 text-6xl"><span>🇩🇿</span><span>🇦🇫</span></div>
         <h1 class="hero-title">HMD-DZ</h1>
-        <p class="tracking-[1.5em] text-[10px] opacity-50 uppercase">COLLECTOR UNIT • v16 THE SELECTOR</p>
-        <button onclick="access()" class="btn-unlock">INITIALISER L'EXTRACTION</button>
+        <p class="tracking-[1.5em] text-[10px] opacity-50 uppercase text-center">Core Investigation Unit • v17 THE CORE</p>
+        <button onclick="enter()" class="btn-unlock">Accéder au Terminal</button>
     </div>
 
     <div id="main-app" class="max-w-[1600px] mx-auto py-6">
@@ -52,103 +47,101 @@
                 <span class="text-6xl">🇩🇿</span>
                 <div>
                     <h2 class="text-6xl font-black italic tracking-tighter leading-none text-white">HMD-DZ</h2>
-                    <p class="text-xs text-red-600 font-bold uppercase tracking-[0.5em]">Global Search & Identity Collector</p>
+                    <p class="text-xs text-red-600 font-bold uppercase tracking-[0.5em]">Supreme Intelligence & Discovery</p>
                 </div>
             </div>
             <div class="glass p-4 rounded border border-white/10 font-mono text-[10px] text-right">
-                UNIT: <span class="text-green-500 font-bold">COLLECTOR-16</span><br>
-                TIME: <span id="clock" class="text-white">00:00:00</span>
+                ID: <span class="text-green-500 font-bold">CORE-UNIT-17</span><br>
+                SYSTEM: <span id="clock" class="text-white">00:00:00</span>
             </div>
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             
             <div class="lg:col-span-3 space-y-6">
-                <div class="panel-glass p-8 rounded-xl">
+                <div class="panel-tech p-8 rounded-xl">
                     <h3 class="text-xs font-bold mb-6 uppercase tracking-[0.2em] text-red-600 border-b border-white/5 pb-2">
-                        <i class="fa-solid fa-id-card mr-2"></i> SAISIE DES PARAMÈTRES (V16)
+                        <i class="fa-solid fa-database mr-2"></i> SAISIE DES DONNÉES CIBLE
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div><span class="label-tech">Prénom</span><input id="i-fn" class="input-tech" placeholder="Ex: Assiya"></div>
-                        <div><span class="label-tech">Nom de Famille</span><input id="i-ln" class="input-tech" placeholder="Ex: Benchaabane"></div>
-                        <div><span class="label-tech">Pseudo</span><input id="i-un" class="input-tech" placeholder="@username"></div>
-                        <div><span class="label-tech">Année de Naissance</span><input id="i-year" class="input-tech" placeholder="Ex: 1998"></div>
+                        <div><span class="label-val">Prénom</span><input id="i-fn" class="input-tech" placeholder="Ex: Ahmed"></div>
+                        <div><span class="label-val">Nom de Famille</span><input id="i-ln" class="input-tech" placeholder="Ex: Benchaabane"></div>
+                        <div><span class="label-val">Pseudo (Username)</span><input id="i-un" class="input-tech" placeholder="@pseudo"></div>
+                        <div><span class="label-val">Année de Naissance</span><input id="i-yr" class="input-tech" placeholder="Ex: 1995"></div>
                         
-                        <div><span class="label-tech">Ville / Pays</span><input id="i-ci" class="input-tech" placeholder="Alger, Paris..."></div>
-                        <div><span class="label-tech">Adresse</span><input id="i-ad" class="input-tech"></div>
+                        <div><span class="label-val">Ville / Localisation</span><input id="i-ci" class="input-tech" placeholder="Alger, Paris..."></div>
+                        <div><span class="label-val">Adresse / Quartier</span><input id="i-ad" class="input-tech"></div>
                         <div><span class="label-tech">Nom du Père</span><input id="i-fat" class="input-tech"></div>
-                        <div><span class="label-tech">Tél Principal</span><input id="i-ph" class="input-tech"></div>
+                        <div><span class="label-tech">Tél (si connu)</span><input id="i-ph" class="input-tech"></div>
                         
                         <div><span class="label-tech">Email</span><input id="i-em" class="input-tech"></div>
-                        <div><span class="label-tech">Job / École</span><input id="i-job" class="input-tech"></div>
+                        <div><span class="label-tech">Emploi / École</span><input id="i-job" class="input-tech"></div>
                         <div><span class="label-tech">Plaque Véhicule</span><input id="i-pl" class="input-tech"></div>
-                        <div><span class="label-tech">Réseaux Favoris / Habitudes</span><input id="i-hab" class="input-tech" placeholder="Snapchat, Gaming..."></div>
+                        <div><span class="label-tech">Autres (Discord, etc.)</span><input id="i-ex" class="input-tech"></div>
                     </div>
 
-                    <button onclick="strike()" class="btn-strike tracking-[0.5em]">Lancer l'extraction et le collecteur de listes</button>
+                    <button onclick="hunt()" class="btn-strike">Lancer l'Extraction de Données</button>
                 </div>
 
                 <div class="bg-black border border-white/5 p-3 h-20 overflow-y-auto font-mono text-[9px] text-green-500" id="logs">
-                    <div>> SYSTEM READY. WAITING FOR INPUT...</div>
+                    <div>> SYSTEM READY. WAITING FOR DATA...</div>
                 </div>
             </div>
 
             <div class="space-y-6">
-                <div class="panel-glass p-6 min-h-[400px] rounded-xl">
-                    <h3 class="text-xs font-bold mb-6 border-b border-white/5 pb-2 uppercase text-red-600 italic">Oracle v16</h3>
-                    <div id="oracle-links" class="space-y-2">
-                        <div class="text-center py-20 opacity-10"><i class="fa-solid fa-satellite-dish text-6xl"></i></div>
+                <div class="panel-tech p-6 min-h-[400px] rounded-xl text-center">
+                    <h3 class="text-xs font-bold mb-6 border-b border-white/5 pb-2 uppercase text-red-600 italic">Oracle v17</h3>
+                    <div id="oracle-box" class="space-y-2">
+                        <i class="fa-solid fa-satellite-dish text-6xl opacity-10 py-20"></i>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="list-picker" class="mt-8 hidden">
+        <div id="selector-hub" class="mt-8 hidden">
             <h3 class="text-3xl font-black italic uppercase mb-6 text-white border-l-8 border-dz-green pl-4">
-                <i class="fa-solid fa-list-ol mr-4 text-green-500"></i> Liste des cibles potentielles détectées
+                <i class="fa-solid fa-users-viewfinder mr-4 text-green-500"></i> Localisation et Identification
             </h3>
-            <p class="text-xs opacity-50 mb-6 italic italic">Le système a détecté plusieurs individus correspondant à ces critères. Cliquez pour sélectionner la bonne cible :</p>
-            
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="selector-box">
-                    <span class="text-[10px] font-bold text-green-500 uppercase">Voir toutes les personnes (Annuaires)</span>
-                    <div id="picker-annu" class="space-y-2 mt-4"></div>
+                <div class="data-card">
+                    <span class="text-[10px] font-bold text-green-500 uppercase">Trouver l'Adresse Exacte</span>
+                    <div id="h-annu" class="space-y-2 mt-4"></div>
                 </div>
-                <div class="selector-box">
-                    <span class="text-[10px] font-bold text-green-500 uppercase">Identifier par le visage (Social)</span>
-                    <div id="picker-social" class="space-y-2 mt-4"></div>
+                <div class="data-card">
+                    <span class="text-[10px] font-bold text-green-500 uppercase">Extraire le Visage (Social)</span>
+                    <div id="h-soc" class="space-y-2 mt-4"></div>
                 </div>
-                <div class="selector-box">
-                    <span class="text-[10px] font-bold text-green-500 uppercase">Documents & Dossiers Publics</span>
-                    <div id="picker-deep" class="space-y-2 mt-4"></div>
+                <div class="data-card">
+                    <span class="text-[10px] font-bold text-green-500 uppercase">Archives et Fuites (Privé)</span>
+                    <div id="h-deep" class="space-y-2 mt-4"></div>
                 </div>
             </div>
         </div>
 
         <div id="dossier" class="mt-12 hidden pb-20">
-            <div class="panel-glass p-10 rounded-xl border-l-[15px] border-dz-red bg-[#050505]">
+            <div class="panel-tech p-10 rounded-xl border-l-[15px] border-dz-red bg-[#050505]">
                 <div class="flex flex-col md:flex-row justify-between mb-10 gap-8">
                     <div>
-                        <span class="bg-red-600 text-white text-[8px] px-2 py-1 font-bold mb-4 inline-block uppercase">Dossier #HMD-V16 COLLECTOR-INTEL</span>
-                        <h3 class="text-7xl font-black uppercase italic tracking-tighter text-white" id="d-title">RAPPORT_CIBLE</h3>
+                        <span class="bg-red-600 text-white text-[8px] px-2 py-1 font-bold mb-4 inline-block uppercase italic">Rapport d'Intelligence HMD-DZ</span>
+                        <h3 class="text-7xl font-black uppercase italic tracking-tighter text-white" id="d-title">DOSSIER_CIBLE</h3>
                     </div>
                     <div class="text-8xl">🇩🇿 🇦🇫</div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div><p class="data-label">Identité Civile</p><p id="r-name" class="data-val">---</p></div>
-                    <div><p class="data-label">Année de Naissance</p><p id="r-year" class="data-val">---</p></div>
-                    <div><p class="data-label">Habitudes Numériques</p><p id="r-hab" class="data-val text-sm">---</p></div>
-                    <div><p class="data-label">Localisation Probable</p><p id="r-loc" class="data-val">---</p></div>
-                    <div><p class="data-label">Père / Filiation</p><p id="r-father" class="data-val">---</p></div>
-                    <div><p class="data-label">Emails Déduits</p><p id="r-emails" class="data-val text-[10px] font-mono">---</p></div>
-                    <div><p class="data-label">Profession / École</p><p id="r-job" class="data-val text-sm">---</p></div>
-                    <div><p class="data-label">Statut Traque</p><p class="data-val text-red-600 underline">VERROUILLÉ</p></div>
+                    <div><span class="label-val">Nom Prénom Détecté</span><span id="r-name" class="text-val">---</span></div>
+                    <div><span class="label-val">Année de Naissance</span><span id="r-yr" class="text-val">---</span></div>
+                    <div><span class="label-val">Localisation Satellite</span><span id="r-loc" class="text-val">---</span></div>
+                    <div><span class="label-val">Contact Détecté</span><span id="r-con" class="text-val text-sm">---</span></div>
+                    <div><span class="label-val">Emploi / École Probable</span><span id="r-job" class="text-val text-sm">---</span></div>
+                    <div><span class="label-val">Père / Famille</span><span id="r-fat" class="text-val">---</span></div>
+                    <div><span class="label-val">Emails Déduits</span><span id="r-em" class="text-val text-[10px] font-mono">---</span></div>
+                    <div><span class="label-val">Statut du Scan</span><span class="text-val text-red-600 animate-pulse">EXTRACTION EN COURS...</span></div>
                 </div>
 
                 <div class="mt-12 border-t border-white/5 pt-10">
-                    <h4 class="text-xs font-bold text-red-600 uppercase mb-4 underline">Note d'Investigation Collector :</h4>
+                    <h4 class="text-xs font-bold text-red-600 uppercase mb-4 underline">Synthèse du système (DÉDUCTION) :</h4>
                     <p id="r-note" class="text-xs italic opacity-60 leading-relaxed"></p>
                 </div>
             </div>
@@ -160,99 +153,99 @@
         // HORLOGE
         setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
 
-        // ACCESS
-        function access() {
+        // ENTRÉE SUR LE SITE (FIXÉ)
+        function enter() {
             document.getElementById('splash').style.display = 'none';
             document.getElementById('main-app').style.display = 'block';
-            addLog("AUTHENTIFICATION RÉUSSIE. MODE COLLECTOR v16 ACTIF.");
         }
 
-        function addLog(msg) {
+        // LOGGING
+        function log(msg) {
             const l = document.getElementById('logs');
             l.innerHTML += `<div>[${new Date().toLocaleTimeString()}] > ${msg}</div>`;
             l.scrollTop = l.scrollHeight;
         }
 
-        // MOTEUR D'EXTRACTION v16
-        function strike() {
+        // MOTEUR D'EXTRACTION v17
+        function hunt() {
             const i = {
                 fn: document.getElementById('i-fn').value.trim(),
                 ln: document.getElementById('i-ln').value.trim(),
                 un: document.getElementById('i-un').value.trim().replace('@', ''),
-                yr: document.getElementById('i-year').value.trim(),
-                hab: document.getElementById('i-hab').value.trim(),
-                fat: document.getElementById('i-fat').value.trim(),
+                yr: document.getElementById('i-yr').value.trim(),
                 ci: document.getElementById('i-ci').value.trim(),
                 ad: document.getElementById('i-ad').value.trim(),
+                fat: document.getElementById('i-fat').value.trim(),
                 em: document.getElementById('i-em').value.trim(),
                 ph: document.getElementById('i-ph').value.trim(),
                 job: document.getElementById('i-job').value.trim(),
-                pl: document.getElementById('i-pl').value.trim()
+                pl: document.getElementById('i-pl').value.trim(),
+                ex: document.getElementById('i-ex').value.trim()
             };
 
-            if(!i.fn && !i.un && !i.ln) { alert("ERREUR : Saisissez au moins un nom ou un pseudo."); return; }
+            if(!i.fn && !i.un && !i.ln) { alert("ERREUR : Saisissez au moins un NOM."); return; }
 
-            addLog(`RECHERCHE DE LISTES LANCÉE POUR : ${i.fn} ${i.ln}...`);
-            document.getElementById('list-picker').classList.remove('hidden');
+            log(`Initialisation de la traque sur ${i.fn} ${i.ln}...`);
+            document.getElementById('selector-hub').classList.remove('hidden');
             document.getElementById('dossier').classList.remove('hidden');
 
-            // --- 1. REMPLISSAGE DU RAPPORT ---
-            document.getElementById('d-title').innerText = i.un || i.fn || "TARGET_X";
+            // --- 1. REMPLISSAGE DU DOSSIER ---
+            document.getElementById('d-title').innerText = i.un || i.ln || "TARGET_X";
             document.getElementById('r-name').innerText = `${i.fn} ${i.ln}`.trim() || "INCONNU";
-            document.getElementById('r-year').innerText = i.yr || "NON SPÉCIFIÉ";
-            document.getElementById('r-hab').innerText = i.hab || "AUCUNE INFO";
-            document.getElementById('r-loc').innerText = `${i.ci} ${i.ad}`.trim() || "ZONE MONDIALE";
-            document.getElementById('r-father').innerText = i.fat || "--";
-            document.getElementById('r-job').innerText = i.job || "--";
+            document.getElementById('r-yr').innerText = i.yr || "DÉDUCTION EN COURS";
+            document.getElementById('r-loc').innerText = `${i.ci} ${i.ad}`.trim() || "MONDE";
+            document.getElementById('r-con').innerText = `${i.ph} ${i.em}`.trim() || "NON RENSEIGNÉ";
+            document.getElementById('r-job').innerText = i.job || "NON DÉTECTÉ";
+            document.getElementById('r-fat').innerText = i.fat || "--";
 
             if(i.fn && i.ln) {
-                document.getElementById('r-emails').innerText = `${i.fn.toLowerCase()}.${i.ln.toLowerCase()}@gmail.com / ${i.ln.toLowerCase()}${i.yr || ''}@outlook.com`;
+                document.getElementById('r-em').innerText = `${i.fn.toLowerCase()}.${i.ln.toLowerCase()}@gmail.com / ${i.ln.toLowerCase()}${i.fn.toLowerCase()}@outlook.com`;
             }
 
-            document.getElementById('r-note').innerText = `L'individu ${i.fn} a été traité par le collecteur HMD-DZ. Le système a identifié plusieurs profils correspondants. L'année de naissance ${i.yr || 'inconnue'} est un pivot majeur pour filtrer les résultats dans les annuaires publics. Les habitudes (${i.hab}) suggèrent une présence sur les plateformes citées ci-contre.`;
+            document.getElementById('r-note').innerText = `L'individu ${i.fn} ${i.ln} est analysé. Sa localisation à ${i.ci || 'l\'international'} permet d'utiliser les annuaires PagesBlanches pour extraire l'adresse physique exacte. Les recherches de documents PDF permettent de déduire son année de naissance via les listes scolaires.`;
 
-            // --- 2. LE PICKER (LES LISTES) ---
-            const pAnnu = document.getElementById('picker-annu');
-            const pSoc = document.getElementById('picker-social');
-            const pDeep = document.getElementById('picker-deep');
-            pAnnu.innerHTML = pSoc.innerHTML = pDeep.innerHTML = "";
+            // --- 2. HUB DE SÉLECTION (LES LIENS QUI TROUVENT TOUT) ---
+            const hAnnu = document.getElementById('h-annu');
+            const hSoc = document.getElementById('h-soc');
+            const hDeep = document.getElementById('h-deep');
+            hAnnu.innerHTML = hSoc.innerHTML = hDeep.innerHTML = "";
 
-            // Listes Annuaires
+            // ANNUAIRES (POUR L'ADRESSE ET LE TÉLÉPHONE)
             const annu = [
-                {t: `Voir toutes les "${i.fn}" (PagesBlanches)`, l: `https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${i.fn}+${i.ln}&ou=${i.ci}`},
-                {t: `Liste des profils LinkedIn "${i.fn}"`, l: `https://www.google.com/search?q=site:linkedin.com/in+"${i.fn}+${i.ln}"`},
-                {t: `Dossiers Administratifs (Google)`, l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+${i.ci}`}
+                {t: `PagesBlanches : Trouver l'adresse de ${i.fn} ${i.ln}`, l: `https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${i.fn}+${i.ln}&ou=${i.ci}`},
+                {t: `LinkedIn : Trouver l'entreprise de ${i.fn}`, l: `https://www.google.com/search?q=site:linkedin.com/in+"${i.fn}+${i.ln}"`},
+                {t: `Infogreffe : Registre des commerces`, l: `https://www.infogreffe.fr/recherche-entreprise-dirigeant/resultats-recherche-entreprise-dirigeant.html?phrase=${i.ln}`}
             ];
-            // Listes Social
+            // SOCIAL (POUR LES PHOTOS ET L'ÂGE)
             const soc = [
-                {t: `Profils Instagram correspondants`, l: `https://www.google.com/search?q=site:instagram.com+"${i.fn}+${i.ln}"+OR+"${i.un}"`},
-                {t: `Recherche Visages (FaceCheck)`, l: `https://facecheck.id/`},
-                {t: `Utilisateurs Facebook "${i.fn}"`, l: `https://www.facebook.com/search/people/?q=${i.fn}+${i.ln}`}
+                {t: `Instagram Scan (@${i.un || i.fn})`, l: `https://www.google.com/search?q=site:instagram.com+"${i.un || i.fn + i.ln}"`},
+                {t: `Facebook : Trouver le visage`, l: `https://www.facebook.com/search/people/?q=${i.fn}+${i.ln}`},
+                {t: `FaceCheck.ID : Recherche par photo`, l: `https://facecheck.id/`}
             ];
-            // Deep
+            // DEEP (POUR LES INFOS PRIVÉES ET LEAKS)
             const deep = [
-                {t: `Fichiers PDF (Examens, Listes)`, l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+filetype:pdf`},
-                {t: `Extraction Leaks (BreachDirectory)`, l: `https://breachdirectory.org/`},
-                {t: `Epieos Email Tracker`, l: `https://epieos.com/?q=${i.em}`}
+                {t: `Fichiers PDF (Listes, Examens, CV)`, l: `https://www.google.com/search?q="${i.fn}+${i.ln}"+filetype:pdf`},
+                {t: `Epieos : Tracker l'Email ${i.em}`, l: `https://epieos.com/?q=${i.em}`},
+                {t: `BreachDirectory : Fuites de données`, l: `https://breachdirectory.org/`}
             ];
 
-            annu.forEach(x => pAnnu.innerHTML += `<a href="${x.l}" target="_blank" class="selector-item"><span>${x.t}</span> <i class="fa-solid fa-chevron-right"></i></a>`);
-            soc.forEach(x => pSoc.innerHTML += `<a href="${x.l}" target="_blank" class="selector-item" style="border-left-color: var(--dz-green)"><span>${x.t}</span> <i class="fa-solid fa-chevron-right"></i></a>`);
-            deep.forEach(x => pDeep.innerHTML += `<a href="${x.l}" target="_blank" class="selector-item" style="border-left-color: #555"><span>${x.t}</span> <i class="fa-solid fa-chevron-right"></i></a>`);
+            annu.forEach(x => hAnnu.innerHTML += `<a href="${x.l}" target="_blank" class="link-item"><span>${x.t}</span> <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`);
+            soc.forEach(x => hSoc.innerHTML += `<a href="${x.l}" target="_blank" class="link-item" style="border-left-color: var(--dz-green)"><span>${x.t}</span> <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`);
+            deep.forEach(x => hDeep.innerHTML += `<a href="${x.l}" target="_blank" class="link-item" style="border-left-color: #555"><span>${x.t}</span> <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`);
 
             // --- 3. ORACLE SIDEBAR ---
-            const ora = document.getElementById('oracle-links');
+            const ora = document.getElementById('oracle-box');
             ora.innerHTML = "";
             const oracle = [
-                {t: "Snapchat Account", l: `https://www.snapchat.com/add/${i.un}`},
-                {t: "TikTok Intelligence", l: `https://www.tiktok.com/@${i.un}`},
                 {t: "Vinted (Livraison)", l: `https://www.vinted.fr/member/${i.un || i.fn}`},
-                {t: "Plaque Véhicule", l: `https://www.google.com/search?q="${i.pl}"`}
+                {t: "TikTok Intelligence", l: `https://www.tiktok.com/@${i.un}`},
+                {t: "Snapchat Discovery", l: `https://www.snapchat.com/add/${i.un}`},
+                {t: "Satellite Google Maps", l: `https://www.google.com/maps/search/${encodeURIComponent(i.ad + ' ' + i.ci)}`}
             ];
             oracle.forEach(x => ora.innerHTML += `<a href="${x.l}" target="_blank" class="block bg-white text-black p-3 rounded font-bold text-[10px] mb-2 hover:bg-dz-green hover:text-white transition uppercase">${x.t}</a>`);
 
-            addLog("GÉNÉRATION TERMINÉE. VEUILLEZ FILTRER LA CIBLE DANS LES LISTES.");
-            document.getElementById('list-picker').scrollIntoView({ behavior: 'smooth' });
+            log("EXTRACTION TERMINÉE. CONSULTEZ LE SÉLECTEUR POUR LES INFOS PRÉCISES.");
+            document.getElementById('selector-hub').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
