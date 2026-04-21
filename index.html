@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMD-DZ | THE OVERLORD v26</title>
+    <title>HMD-DZ | THE SOVEREIGN v27</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -12,364 +12,287 @@
         :root {
             --dz-green: #006233;
             --dz-red: #d21034;
-            --bg-deep: #0a0b10;
-            --card-bg: #161b22;
-            --text-main: #c9d1d9;
-            --accent-blue: #58a6ff;
+            --bg-black: #050505;
+            --card-bg: #0d1117;
+            --neon-blue: #58a6ff;
         }
 
-        * {
-            box-sizing: border-box;
-            font-family: 'JetBrains Mono', monospace;
+        * { box-sizing: border-box; font-family: 'JetBrains Mono', monospace; }
+        body { background-color: var(--bg-black); color: #c9d1d9; margin: 0; overflow-x: hidden; }
+
+        /* --- LANDING PAGE (ACCUEIL) --- */
+        #landing-page {
+            position: fixed; inset: 0; background: #000; z-index: 20000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
-        body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            margin: 0;
-            overflow-x: hidden;
-            padding-bottom: 100px;
-        }
-
-        /* --- LOGO ROYAL HMD-DZ --- */
-        .hmd-header {
-            background: linear-gradient(to bottom, #000, var(--bg-deep));
-            border-bottom: 4px solid var(--dz-green);
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .hmd-logo {
+        .hero-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 15vw, 9rem);
+            font-size: clamp(4rem, 18vw, 12rem);
             font-weight: 900;
-            line-height: 0.8;
-            text-transform: uppercase;
             background: linear-gradient(to right, var(--dz-green) 40%, #fff 50%, var(--dz-red) 60%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
-            letter-spacing: -5px;
+            filter: drop-shadow(0 0 30px rgba(255,255,255,0.1));
+            letter-spacing: -8px;
+            animation: pulse 3s infinite;
         }
 
-        /* --- PANNEAU DE CONTRÔLE --- */
-        .glass-panel {
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+        .btn-enter {
+            margin-top: 50px; padding: 25px 80px;
+            background: transparent; border: 2px solid white;
+            color: white; font-weight: 900; text-transform: uppercase;
+            letter-spacing: 10px; cursor: pointer; transition: 0.5s;
+        }
+
+        .btn-enter:hover { background: white; color: black; box-shadow: 0 0 50px white; }
+
+        /* --- DASHBOARD --- */
+        #app-container { display: none; padding-bottom: 100px; }
+
+        .top-bar {
+            background: linear-gradient(to bottom, #000, var(--bg-black));
+            border-bottom: 4px solid var(--dz-green);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .panel-v27 {
             background: var(--card-bg);
             border: 1px solid #30363d;
-            border-radius: 12px;
+            border-radius: 4px;
             padding: 35px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
         }
 
-        .section-title {
+        .section-header {
             color: var(--dz-red);
             font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: 2px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 10px;
+            letter-spacing: 3px;
         }
 
         .hmd-input {
-            background: #0d1117 !important;
+            background: #000 !important;
             border: 1px solid #30363d !important;
             color: #fff !important;
-            padding: 14px;
-            width: 100%;
-            font-size: 0.85rem;
-            border-radius: 6px;
-            outline: none;
-            transition: 0.3s;
+            padding: 12px; width: 100%; font-size: 0.8rem;
+            outline: none; transition: 0.3s;
         }
 
-        .hmd-input:focus {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 10px rgba(88,166,255,0.1);
-        }
+        .hmd-input:focus { border-color: var(--neon-blue); }
 
-        .label-tech {
-            font-size: 0.6rem;
-            color: #8b949e;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            display: block;
-            font-weight: bold;
-        }
+        .label-tech { font-size: 0.6rem; color: #8b949e; text-transform: uppercase; font-weight: bold; margin-bottom: 4px; display: block; }
 
-        .btn-overlord {
+        .btn-sovereign {
             background: linear-gradient(90deg, var(--dz-green), var(--dz-red));
-            color: #fff;
-            font-weight: 800;
-            padding: 22px;
-            width: 100%;
-            border: none;
+            color: #fff; font-weight: 900; padding: 25px;
+            width: 100%; border: none; text-transform: uppercase;
+            letter-spacing: 5px; cursor: pointer; font-size: 1.3rem; margin-top: 20px;
+        }
+
+        .btn-sovereign:hover { filter: brightness(1.3); box-shadow: 0 0 50px rgba(0, 98, 51, 0.4); }
+
+        /* --- DOSSIER RESULTATS (STYLE LEAK) --- */
+        .leak-dossier {
+            background: #161b22;
             border-radius: 8px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: 0.4s;
-            margin-top: 30px;
+            border: 1px solid #30363d;
+            border-left: 10px solid var(--dz-green);
+            padding: 35px;
+            margin-bottom: 30px;
         }
 
-        .btn-overlord:hover {
-            filter: brightness(1.3);
-            transform: scale(1.01);
-            box-shadow: 0 0 40px rgba(0, 98, 51, 0.4);
+        .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .data-cell { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
+        .cell-label { color: #8b949e; font-size: 0.65rem; text-transform: uppercase; }
+        .cell-val { color: #fff; font-size: 1rem; font-weight: bold; display: block; }
+
+        .tool-button {
+            background: #21262d; color: #c9d1d9; padding: 15px;
+            display: flex; justify-content: space-between; align-items: center;
+            text-decoration: none; border-radius: 6px; margin-bottom: 10px;
+            font-size: 0.8rem; font-weight: bold; border: 1px solid #30363d;
         }
 
-        /* --- RÉSULTATS : STYLE LEAK PRO --- */
-        .leak-file {
-            background: #1c2128;
-            border-radius: 12px;
-            border: 1px solid #444c56;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 25px;
-        }
-
-        .leak-file::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 6px; height: 100%;
-            background: var(--dz-green);
-        }
-
-        .status-badge {
-            font-size: 0.65rem;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-        .bg-blue-tag { background: #388bfd; color: #fff; }
-        .bg-gold-tag { background: #e3b341; color: #000; }
-
-        .leak-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .leak-item {
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 8px;
-        }
-
-        .leak-label { color: #8b949e; font-size: 0.7rem; text-transform: uppercase; display: block; }
-        .leak-value { color: #adbac7; font-size: 1rem; font-weight: bold; }
-
-        /* --- HUB LATÉRAL --- */
-        .side-tool {
-            background: #2d333b;
-            color: #adbac7;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            transition: 0.3s;
-            border-left: 5px solid transparent;
-        }
-
-        .side-tool:hover {
-            background: #444c56;
-            color: #fff;
-            transform: translateX(8px);
-            border-left-color: var(--dz-red);
-        }
+        .tool-button:hover { background: #30363d; color: #fff; border-color: var(--dz-red); }
     </style>
 </head>
 <body>
 
-    <header class="hmd-header">
-        <div class="flex justify-center gap-10 mb-8 text-6xl"><span>🇩🇿</span><span>🇦🇫</span></div>
-        <h1 class="hmd-logo">HMD-DZ</h1>
-        <p class="uppercase tracking-[1em] text-[11px] opacity-40 mt-6 font-bold">The Overlord • Master Breach Intelligence v26</p>
-    </header>
+    <div id="landing-page">
+        <div class="flex gap-10 mb-8 text-5xl"><span>🇩🇿</span><span>🇦🇫</span></div>
+        <h1 class="hero-logo">HMD-DZ</h1>
+        <p class="tracking-[2em] text-[10px] opacity-40 uppercase font-bold">The Sovereign Intelligence Hub</p>
+        <button onclick="launchApp()" class="btn-enter">Initialiser</button>
+        <div class="mt-20 font-mono text-[8px] opacity-20 uppercase tracking-[1em]">Restricted Access • v27 Sovereign</div>
+    </div>
 
-    <div class="max-w-[1600px] mx-auto p-4 md:p-10">
+    <div id="app-container">
+        
+        <header class="top-bar">
+            <div class="flex justify-center gap-8 mb-4 text-4xl"><span>🇩🇿</span><span>🇦🇫</span></div>
+            <h2 class="hero-logo" style="font-size: 5rem; letter-spacing: -3px;">HMD-DZ</h2>
+            <p class="text-[10px] uppercase tracking-[1em] opacity-40">Global Breach & Identity Extraction</p>
+        </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+        <div class="max-w-[1600px] mx-auto p-4 md:p-10">
             
-            <div class="lg:col-span-3 space-y-8">
-                <div class="glass-panel">
-                    
-                    <div class="mb-10">
-                        <div class="section-title"><i class="fa-solid fa-id-card-clip"></i> Extraction de l'État Civil</div>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                            <div><span class="label-tech">Prénom</span><input id="f-fn" class="hmd-input" placeholder="Ex: Mohamed"></div>
-                            <div><span class="label-tech">Nom de Famille</span><input id="f-ln" class="hmd-input" placeholder="Brahimi"></div>
-                            <div><span class="label-tech">Nom de Jeune Fille</span><input id="f-mn" class="hmd-input"></div>
-                            <div><span class="label-tech">Année/Date Naissance</span><input id="f-dob" class="hmd-input" placeholder="JJ/MM/AAAA"></div>
-                        </div>
-                    </div>
-
-                    <div class="mb-10">
-                        <div class="section-title"><i class="fa-solid fa-map-marked-alt"></i> Coordonnées Géo-Spatiales</div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="md:col-span-2"><span class="label-tech">Adresse / Rue / Résidence</span><input id="f-ad" class="hmd-input"></div>
-                            <div><span class="label-tech">Code Postal / Ville</span><input id="f-ci" class="hmd-input" placeholder="75000 Paris"></div>
-                            <div><span class="label-tech">Pays d'Origine</span><input id="f-nat" class="hmd-input" placeholder="Algérie"></div>
-                            <div><span class="label-tech">Quartier / District</span><input id="f-dist" class="hmd-input"></div>
-                            <div><span class="label-tech">Anciennes Adresses</span><input id="f-old" class="hmd-input"></div>
-                        </div>
-                    </div>
-
-                    <div class="mb-10">
-                        <div class="section-title"><i class="fa-solid fa-user-shield"></i> Données de Fuites & Numérique</div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div><span class="label-tech">Email Principal</span><input id="f-em" class="hmd-input" placeholder="exemple@mail.com"></div>
-                            <div><span class="label-tech">Numéro Téléphone</span><input id="f-ph" class="hmd-input" placeholder="06... / 07..."></div>
-                            <div><span class="label-tech">Pseudo (Username)</span><input id="f-un" class="hmd-input" placeholder="@pseudo"></div>
-                            <div><span class="label-tech">Matricule (CAF, Secu, ID)</span><input id="f-idnum" class="hmd-input"></div>
-                            <div><span class="label-tech">Compte Réseaux (Discord/TG)</span><input id="f-soc" class="hmd-input"></div>
-                            <div><span class="label-tech">Plaque Immatriculation</span><input id="f-pl" class="hmd-input"></div>
-                        </div>
-                    </div>
-
-                    <div class="mb-6">
-                        <div class="section-title"><i class="fa-solid fa-users"></i> Environnement Social & Pro</div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div><span class="label-tech">Nom du Père</span><input id="f-fat" class="hmd-input"></div>
-                            <div><span class="label-tech">Nom de la Mère</span><input id="f-mot" class="hmd-input"></div>
-                            <div><span class="label-tech">Profession / Entreprise</span><input id="f-job" class="hmd-input"></div>
-                        </div>
-                    </div>
-
-                    <button onclick="overlordStrike()" class="btn-overlord">Exécuter la traque Overlord</button>
-                </div>
-
-                <div class="bg-black p-4 rounded-lg border border-white/5 h-28 overflow-y-auto font-mono text-[10px] text-green-500" id="term">
-                    <div>> HMD-DZ OVERLORD v26 CORE LOADED...</div>
-                    <div>> READY FOR DATA INJECTION.</div>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <div class="glass-panel" style="border-top: 5px solid var(--dz-red);">
-                    <h3 class="text-xs font-bold mb-6 uppercase text-red-500">Moteurs de Bases de Données</h3>
-                    <div id="side-hub" class="space-y-2">
-                        <p class="text-[10px] opacity-40 italic">Les informations privées (matricules, mots de passe) sont extraites via ces passerelles.</p>
-                    </div>
-                </div>
-
-                <div class="glass-panel" style="border-top: 5px solid var(--dz-green);">
-                    <h3 class="text-xs font-bold mb-6 uppercase text-green-500">Statut Système</h3>
-                    <div class="text-[10px] font-mono space-y-2">
-                        <div>SERVEUR: <span class="text-white">DZ-GHOST-MAIN</span></div>
-                        <div>TIME: <span id="live-clock" class="text-white">00:00:00</span></div>
-                        <div>ENCRYPTION: <span class="text-white">AES-256</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="results-area" class="hidden mt-20 pb-40">
-            <h3 class="text-4xl font-black uppercase italic mb-12 border-l-[15px] border-dz-green pl-8">Dossiers d'Extraction Overlord</h3>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div id="main-dossier" class="leak-file"></div>
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
                 
-                <div class="leak-file" style="border-left-color: var(--dz-red);">
-                    <h3 class="text-sm font-bold uppercase mb-8 text-red-500"><i class="fa-solid fa-link mr-2"></i> Passerelles de Pivotement</h3>
-                    <div id="pivot-list" class="space-y-3"></div>
+                <div class="lg:col-span-3 space-y-8">
+                    <div class="panel-v27">
+                        
+                        <div class="mb-10">
+                            <div class="section-header"><i class="fa-solid fa-id-card"></i> Extraction État Civil</div>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                <div><span class="label-tech">Prénom</span><input id="f-fn" class="hmd-input" placeholder="Mohamed"></div>
+                                <div><span class="label-tech">Nom</span><input id="f-ln" class="hmd-input" placeholder="Brahimi"></div>
+                                <div><span class="label-tech">Nom de Jeune Fille</span><input id="f-mn" class="hmd-input"></div>
+                                <div><span class="label-tech">Date/Année Naissance</span><input id="f-dob" class="hmd-input" placeholder="JJ/MM/AAAA"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-10">
+                            <div class="section-header"><i class="fa-solid fa-building-columns"></i> Coordonnées & Administratif (CAF/NIR)</div>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                <div class="md:col-span-2"><span class="label-tech">Adresse / Rue</span><input id="f-ad" class="hmd-input"></div>
+                                <div><span class="label-tech">Ville / CP</span><input id="f-ci" class="hmd-input"></div>
+                                <div><span class="label-tech">Matricule CAF / ID</span><input id="f-caf" class="hmd-input" placeholder="Ex: 2575974"></div>
+                                <div><span class="label-tech">N° Sécurité Sociale (NIR)</span><input id="f-ss" class="hmd-input"></div>
+                                <div><span class="label-tech">Nom du Père</span><input id="f-fat" class="hmd-input"></div>
+                                <div><span class="label-tech">Nom de la Mère</span><input id="f-mot" class="hmd-input"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="section-header"><i class="fa-solid fa-fingerprint"></i> Empreinte Digitale & Leaks</div>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                <div><span class="label-tech">Email</span><input id="f-em" class="hmd-input"></div>
+                                <div><span class="label-tech">Téléphone</span><input id="f-ph" class="hmd-input"></div>
+                                <div><span class="label-tech">Pseudo (@)</span><input id="f-un" class="hmd-input"></div>
+                                <div><span class="label-tech">Plaque Véhicule</span><input id="f-pl" class="hmd-input"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="sovereignStrike()" class="btn-sovereign">Exécuter la traque souveraine</button>
+                    </div>
+
+                    <div class="bg-black p-4 rounded border border-white/5 h-28 overflow-y-auto font-mono text-[10px] text-green-500" id="console">
+                        <div>> HMD-DZ SOVEREIGN v27 ENGINE ONLINE.</div>
+                        <div>> AWAITING DATA INJECTION...</div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="panel-v27" style="border-top: 4px solid var(--dz-red);">
+                        <h3 class="text-xs font-bold mb-6 uppercase text-red-500">Moteurs de Leaks & Breach</h3>
+                        <div id="leak-hub" class="space-y-2">
+                            <p class="text-[10px] opacity-40 italic">Les informations sensibles (matricules, passwords) s'extraient via ces terminaux.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="results-area" class="hidden mt-20">
+                <h3 class="text-4xl font-black uppercase italic mb-12 border-l-[15px] border-dz-green pl-8">Dossiers d'Extraction Souverains</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div id="summary-card" class="leak-dossier"></div>
+                    
+                    <div class="leak-dossier" style="border-left-color: var(--dz-red);">
+                        <h3 class="text-sm font-bold uppercase mb-8 text-red-500">Passerelles de Découverte</h3>
+                        <div id="pivot-links" class="space-y-2"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
     <script>
-        // HORLOGE
-        setInterval(() => { document.getElementById('live-clock').innerText = new Date().toLocaleTimeString(); }, 1000);
+        function launchApp() {
+            document.getElementById('landing-page').style.transform = 'translateY(-100%)';
+            setTimeout(() => {
+                document.getElementById('landing-page').style.display = 'none';
+                document.getElementById('app-container').style.display = 'block';
+            }, 1000);
+        }
 
-        // MOTEUR OVERLORD
-        function overlordStrike() {
+        function sovereignStrike() {
             const data = {
                 fn: document.getElementById('f-fn').value.trim(),
                 ln: document.getElementById('f-ln').value.trim(),
-                mn: document.getElementById('f-mn').value.trim(),
                 dob: document.getElementById('f-dob').value.trim(),
                 ad: document.getElementById('f-ad').value.trim(),
                 ci: document.getElementById('f-ci').value.trim(),
+                caf: document.getElementById('f-caf').value.trim(),
                 em: document.getElementById('f-em').value.trim(),
                 ph: document.getElementById('f-ph').value.trim(),
                 un: document.getElementById('f-un').value.trim().replace('@',''),
-                id: document.getElementById('f-idnum').value.trim(),
                 fat: document.getElementById('f-fat').value.trim(),
                 mot: document.getElementById('f-mot').value.trim(),
-                job: document.getElementById('f-job').value.trim(),
                 pl: document.getElementById('f-pl').value.trim()
             };
 
-            if(!data.fn && !data.ln && !data.em && !data.un) return alert("Saisissez au moins une information de base.");
+            if(!data.fn && !data.ln && !data.un) return alert("Saisissez au moins une identité.");
 
             document.getElementById('results-area').classList.remove('hidden');
-            const mainBox = document.getElementById('main-dossier');
-            const pivotBox = document.getElementById('pivot-list');
-            const sideHub = document.getElementById('side-hub');
+            const summary = document.getElementById('summary-card');
+            const pivots = document.getElementById('pivot-links');
+            const leaks = document.getElementById('leak-hub');
 
-            // --- CRÉATION DE LA FICHE STYLE LEAK ---
-            mainBox.innerHTML = `
+            // --- 1. GÉNÉRATION DE LA FICHE STYLE DOSSIER CAF ---
+            summary.innerHTML = `
                 <div class="flex justify-between items-start mb-10">
                     <div class="flex items-center">
-                        <div class="w-16 h-16 bg-indigo-900/30 border-2 border-indigo-500 rounded-lg flex items-center justify-center font-bold text-indigo-400 text-3xl">
+                        <div class="w-16 h-16 bg-blue-900/20 border-2 border-blue-500 rounded-lg flex items-center justify-center font-bold text-blue-400 text-3xl">
                             ${data.fn.charAt(0)}${data.ln.charAt(0) || 'X'}
                         </div>
                         <div class="ml-6">
-                            <div class="text-2xl font-black text-white uppercase leading-none">${data.fn} ${data.ln}</div>
-                            <div class="text-[10px] opacity-40 uppercase tracking-[3px] mt-2">Dossier ID: #DZ-${Math.floor(Math.random()*999999)}</div>
+                            <div class="text-3xl font-black text-white uppercase">${data.fn} ${data.ln}</div>
+                            <div class="text-[9px] opacity-40 uppercase tracking-[3px]">Target ID: #SOV-${Math.floor(Math.random()*888888)}</div>
                         </div>
                     </div>
-                    <div class="flex gap-2">
-                        <span class="status-badge bg-blue-tag">EXTRACTION_OK</span>
-                        <span class="status-badge bg-gold-tag">VERIFIED</span>
-                    </div>
                 </div>
 
-                <div class="leak-grid">
-                    <div class="leak-item"><span class="leak-label">Date Naissance</span><span class="leak-value">${data.dob || '---'}</span></div>
-                    <div class="leak-item"><span class="leak-label">Lieu de vie</span><span class="leak-value">${data.ci || '---'}</span></div>
-                    <div class="leak-item"><span class="leak-label">Adresse Physique</span><span class="leak-value">${data.ad || '---'}</span></div>
-                    <div class="leak-item"><span class="leak-label">Email Détecté</span><span class="leak-value">${data.em || '---'}</span></div>
-                    <div class="leak-item"><span class="leak-label">Téléphone</span><span class="leak-value">${data.ph || '---'}</span></div>
-                    <div class="leak-item"><span class="leak-label">Matricule / ID</span><span class="leak-value text-red-500">${data.id || 'BREACH_REQUIRED'}</span></div>
-                    <div class="leak-item"><span class="leak-label">Père / Mère</span><span class="leak-value text-sm">${data.fat || '--'} / ${data.mot || '--'}</span></div>
-                    <div class="leak-item"><span class="leak-label">Plaque / Véhicule</span><span class="leak-value uppercase">${data.pl || '---'}</span></div>
-                </div>
-
-                <div class="mt-12 p-4 bg-white/5 border border-white/5 rounded italic text-[11px] opacity-40 leading-relaxed">
-                    SOURCE: Les fichiers .json (CAF, AMELI, POLE_EMPLOI) ne sont pas stockés ici. Utilisez les outils Breach à droite pour extraire les fichiers correspondants à l'UID.
+                <div class="data-grid">
+                    <div class="data-cell"><span class="cell-label">Date Naissance</span><span class="cell-val">${data.dob || '---'}</span></div>
+                    <div class="data-cell"><span class="cell-label">Localisation</span><span class="cell-val">${data.ci || '---'}</span></div>
+                    <div class="data-cell"><span class="cell-label">Adresse</span><span class="cell-val">${data.ad || '---'}</span></div>
+                    <div class="data-cell"><span class="cell-label">Email</span><span class="cell-val">${data.em || '---'}</span></div>
+                    <div class="data-cell"><span class="cell-label">Téléphone</span><span class="cell-val">${data.ph || '---'}</span></div>
+                    <div class="data-cell"><span class="cell-label">Matricule CAF</span><span class="cell-val text-red-500">${data.caf || 'BREACH_SCAN_REQUIRED'}</span></div>
+                    <div class="data-cell"><span class="cell-label">Père / Mère</span><span class="cell-val text-sm">${data.fat || '--'} / ${data.mot || '--'}</span></div>
+                    <div class="data-cell"><span class="cell-label">Plaque / ID</span><span class="cell-val uppercase">${data.pl || '---'}</span></div>
                 </div>
             `;
 
-            // --- PIVOTS DE RECHERCHE ---
-            pivotBox.innerHTML = `
-                <a href="https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${data.fn}+${data.ln}&ou=${data.ci}" target="_blank" class="side-tool">Extraire l'adresse précise (PagesBlanches) <i class="fa-solid fa-map-location-dot"></i></a>
-                <a href="https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+filetype:pdf" target="_blank" class="side-tool">Chercher Documents PDF (Diplômes/CV) <i class="fa-solid fa-file-pdf"></i></a>
-                <a href="https://www.social-searcher.com/search-users/?q=${data.fn}+${data.ln}" target="_blank" class="side-tool">Tracker tous les Réseaux Sociaux <i class="fa-solid fa-user-group"></i></a>
-                <a href="https://www.google.com/maps/search/${encodeURIComponent(data.ad + ' ' + data.ci)}" target="_blank" class="side-tool">Visualisation Satellitaire <i class="fa-solid fa-satellite"></i></a>
+            // --- 2. PIVOTS D'INVESTIGATION ---
+            pivots.innerHTML = `
+                <a href="https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${data.fn}+${data.ln}&ou=${data.ci}" target="_blank" class="tool-button">Extraire l'Adresse Physique (PagesBlanches) <i class="fa-solid fa-map-pin"></i></a>
+                <a href="https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+filetype:pdf" target="_blank" class="tool-button">Extraire Dossiers PDF (Diplômes/Examens) <i class="fa-solid fa-file-pdf"></i></a>
+                <a href="https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+adresse+OR+proprietaire" target="_blank" class="tool-button">Recherche Propriétés & Cadastre <i class="fa-solid fa-house-user"></i></a>
+                <a href="https://copainsdavant.linternaute.com/s/?q=${data.fn}+${data.ln}" target="_blank" class="tool-button">Confirmer l'Âge (Copains d'Avant) <i class="fa-solid fa-graduation-cap"></i></a>
             `;
 
-            // --- LEAK HUB SIDEBAR ---
-            sideHub.innerHTML = `
-                <a href="https://breachdirectory.org/" target="_blank" class="side-tool" style="border-left-color: var(--accent-blue)">Accéder aux Bases de Fuites <i class="fa-solid fa-database"></i></a>
-                <a href="https://leakcheck.io/" target="_blank" class="side-tool" style="border-left-color: var(--accent-blue)">Chercher Passwords (LeakCheck) <i class="fa-solid fa-key"></i></a>
-                <a href="https://epieos.com/?q=${data.em}" target="_blank" class="side-tool" style="border-left-color: var(--accent-blue)">Tracker via Email (Epieos) <i class="fa-solid fa-envelope"></i></a>
-                <a href="https://facecheck.id/" target="_blank" class="side-tool" style="border-left-color: var(--accent-blue)">Reconnaissance Faciale (Photo) <i class="fa-solid fa-camera"></i></a>
+            // --- 3. LEAK HUB SIDEBAR ---
+            leaks.innerHTML = `
+                <a href="https://breachdirectory.org/" target="_blank" class="tool-button">Accéder aux Leaks Mondiaux <i class="fa-solid fa-database"></i></a>
+                <a href="https://leakcheck.io/" target="_blank" class="tool-button">Scanner Passwords fuités <i class="fa-solid fa-key"></i></a>
+                <a href="https://epieos.com/?q=${data.em}" target="_blank" class="tool-button">Tracker Email (Epieos) <i class="fa-solid fa-envelope"></i></a>
+                <a href="https://facecheck.id/" target="_blank" class="tool-button">Reconnaissance Faciale <i class="fa-solid fa-camera"></i></a>
             `;
 
-            document.getElementById('term').innerHTML += `<div>[${new Date().toLocaleTimeString()}] > EXTRACTION COMPLÈTE SUR ${data.fn}.</div>`;
+            document.getElementById('console').innerHTML += `<div>[${new Date().toLocaleTimeString()}] > DOSSIER SOUVERAIN GÉNÉRÉ.</div>`;
             document.getElementById('results-area').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
