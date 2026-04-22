@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMD-DZ | V31 THE OMNISCIENT</title>
+    <title>HMD-DZ | V33 THE SYNDICATE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -18,12 +18,25 @@
             --neon-gold: #e3b341;
             --neon-purple: #8957e5;
             --neon-pink: #d946ef;
+            --neon-teal: #2dd4bf;
         }
 
         * { box-sizing: border-box; font-family: 'JetBrains Mono', monospace; }
         body { background-color: var(--bg-black); color: #c9d1d9; margin: 0; overflow-x: hidden; }
 
-        /* --- PAGE D'ACCUEIL (LANDING PAGE) --- */
+        /* --- TICKER NEWS (BARRE DÉFILANTE) --- */
+        .news-ticker-wrap {
+            width: 100%; background: var(--dz-red); color: white; padding: 6px 0;
+            overflow: hidden; border-bottom: 2px solid #000; position: fixed; top: 0; z-index: 30000;
+        }
+        .news-ticker-content {
+            display: inline-block; padding-left: 100%; white-space: nowrap;
+            font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+            animation: ticker 35s linear infinite;
+        }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+        /* --- PAGE D'ACCUEIL (LOGIN) --- */
         #landing-page {
             position: fixed; inset: 0; background: #000; z-index: 20000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -35,29 +48,29 @@
             background: linear-gradient(to right, var(--dz-green) 40%, #fff 50%, var(--dz-red) 60%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); letter-spacing: -6px;
-            animation: pulse 3s infinite;
         }
 
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
-
-        .btn-enter {
-            margin-top: 40px; padding: 20px 60px; border: 2px solid #30363d; background: transparent;
-            color: white; font-weight: 900; text-transform: uppercase; letter-spacing: 5px; 
-            cursor: pointer; transition: 0.3s; border-radius: 4px; font-size: 1.2rem;
+        .login-box {
+            background: #0d1117; border: 1px solid #30363d; padding: 40px; border-radius: 8px;
+            text-align: center; margin-top: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        .btn-enter:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 0 40px rgba(255, 255, 255, 0.4); }
+        .btn-gmail {
+            background: #fff; color: #000; font-weight: 900; padding: 15px 40px;
+            border-radius: 4px; display: flex; align-items: center; gap: 15px; cursor: pointer;
+            transition: 0.3s; border: none; font-size: 1rem; text-transform: uppercase;
+        }
+        .btn-gmail:hover { background: #e2e8f0; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,255,255,0.2); }
 
         /* --- UI COMPONENTS --- */
-        #app-container { display: none; padding-bottom: 100px; }
+        #app-container { display: none; padding-bottom: 100px; padding-top: 30px; } /* padding-top for ticker */
         
-        .header-bar { border-bottom: 2px solid var(--dz-green); padding: 30px 20px; text-align: center; background: #000; }
+        .header-bar { border-bottom: 2px solid var(--dz-green); padding: 30px 20px; background: #000; }
         
         .hero-logo {
             font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900;
             background: linear-gradient(to right, var(--dz-green) 40%, #fff 50%, var(--dz-red) 60%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            letter-spacing: -2px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px;
         }
 
         .panel {
@@ -72,10 +85,9 @@
 
         .input-box {
             background: #050505 !important; border: 1px solid #30363d !important; color: #fff !important;
-            padding: 10px; width: 100%; font-size: 0.85rem; border-radius: 4px; outline: none; transition: 0.3s;
+            padding: 10px; width: 100%; font-size: 0.8rem; border-radius: 4px; outline: none; transition: 0.3s;
         }
         .input-box:focus { border-color: var(--neon-blue); }
-        
         .input-label { font-size: 0.65rem; color: #8b949e; text-transform: uppercase; font-weight: bold; margin-bottom: 5px; display: block; }
 
         .btn-master {
@@ -83,71 +95,99 @@
             padding: 20px; width: 100%; border: none; border-radius: 6px; text-transform: uppercase;
             letter-spacing: 3px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 15px;
         }
-        .btn-master:hover { filter: brightness(1.2); }
+        .btn-master:hover { filter: brightness(1.2); box-shadow: 0 0 30px rgba(0,0,0,0.8); }
 
         /* --- RESULTS --- */
         .tool-btn {
-            background: #21262d; color: #c9d1d9; padding: 10px 12px; display: flex; justify-content: space-between;
+            background: #21262d; color: #c9d1d9; padding: 12px 15px; display: flex; justify-content: space-between;
             align-items: center; text-decoration: none; border-radius: 4px; margin-bottom: 8px;
             font-size: 0.75rem; font-weight: bold; border: 1px solid #30363d; transition: 0.2s; border-left: 4px solid var(--dz-green);
         }
         .tool-btn:hover { background: #30363d; color: #fff; transform: translateX(5px); }
         
-        .dossier-card { background: #0d1117; border: 1px solid #30363d; padding: 25px; border-radius: 8px; border-left: 8px solid var(--dz-red); }
-        .data-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 0; }
+        .dossier-card { background: #0d1117; border: 1px solid #30363d; padding: 30px; border-radius: 8px; border-left: 10px solid var(--dz-red); }
+        .data-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 0; margin-bottom: 5px;}
         .d-label { color: #8b949e; font-size: 0.65rem; text-transform: uppercase; font-weight: bold; }
-        .d-val { color: #fff; font-size: 0.9rem; font-weight: bold; text-align: right; }
+        .d-val { color: #fff; font-size: 0.85rem; font-weight: bold; text-align: right; }
+        
+        .status-badge { font-size: 0.6rem; padding: 3px 8px; border-radius: 4px; font-weight: 800; text-transform: uppercase; margin-left: 5px; }
     </style>
 </head>
 <body>
 
+    <div class="news-ticker-wrap">
+        <div class="news-ticker-content">
+            🔴 FLASH INFO : Le conflit en Palestine s'intensifie, alerte humanitaire à Gaza. | 🟢 LE SAVIEZ-VOUS ? 80% des adresses physiques peuvent être trouvées via des fuites de livraisons (Vinted, Amazon). | 🔴 TENSIONS : L'Iran menace de nouvelles représailles au Moyen-Orient suite aux récents événements. | 🟢 LE SAVIEZ-VOUS ? Les pseudos de jeux vidéo (Minecraft, PSN) sont le meilleur moyen de retrouver l'identité réelle d'un mineur. | 🔴 CYBER-GUERRE : Augmentation des attaques DDOS et des fuites de bases de données gouvernementales. | 🟢 ASTUCE OSINT : Utilisez Epieos pour vérifier si un email est relié à un compte Google Maps.
+        </div>
+    </div>
+
     <div id="landing-page">
-        <div class="flex gap-8 mb-6 text-6xl"><span>🇩🇿</span><span>🇦🇫</span></div>
+        <div class="flex gap-8 mb-4 text-5xl"><span>🇩🇿</span><span>🇦🇫</span></div>
         <h1 class="hero-logo-landing">HMD-DZ</h1>
-        <p class="tracking-[1.5em] text-[10px] opacity-50 uppercase font-bold mt-4">The Omniscient Intelligence Engine • v31</p>
-        <button onclick="launchApp()" class="btn-enter">Initialiser le système</button>
-        <div class="mt-20 font-mono text-[8px] opacity-20 uppercase tracking-[1em]">Secure Access Required</div>
+        <p class="tracking-[1em] text-[10px] opacity-50 uppercase font-bold mt-2">Syndicate Intelligence Network</p>
+        
+        <div class="login-box">
+            <h3 class="text-white font-bold mb-6 text-sm uppercase">Accès Restreint</h3>
+            <p class="text-[10px] opacity-40 mb-6 w-64 mx-auto">Veuillez vous authentifier avec une adresse Gmail vérifiée pour accéder aux bases de données classifiées.</p>
+            <button onclick="simulateLogin()" class="btn-gmail" id="login-btn">
+                <i class="fa-brands fa-google text-red-500 text-xl"></i> Connexion avec Gmail
+            </button>
+            <div id="login-loader" class="hidden mt-4 text-[10px] text-green-500 animate-pulse">Authentification en cours...</div>
+        </div>
     </div>
 
     <div id="app-container">
-        <header class="header-bar flex flex-col md:flex-row justify-between items-center">
+        
+        <header class="header-bar flex flex-col md:flex-row justify-between items-center mt-4">
             <div class="flex items-center gap-6">
                 <span class="text-4xl">🇩🇿</span>
                 <div class="text-left">
                     <h2 class="hero-logo">HMD-DZ</h2>
-                    <p class="text-[10px] uppercase tracking-[0.4em] text-red-500 font-bold">Global & Youth OSINT V31</p>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-red-500 font-bold">Total OSINT & Breach Dashboard V33</p>
                 </div>
             </div>
-            <div class="font-mono text-[10px] opacity-50 mt-4 md:mt-0 text-right">
-                STATUS: <span class="text-green-500">GLOBAL_NETWORK_ACTIVE</span><br>
-                TIME: <span id="clock">00:00:00</span>
+            <div class="font-mono text-[10px] opacity-80 mt-4 md:mt-0 text-right bg-black/50 p-3 rounded border border-white/10">
+                <div class="text-green-500 mb-1">● SERVEUR SÉCURISÉ ACTIF</div>
+                <div>AGENTS CONNECTÉS : <span id="active-users" class="text-white font-bold text-lg">142</span></div>
+                <div>HEURE : <span id="clock" class="text-blue-400">00:00:00</span></div>
             </div>
         </header>
 
         <div class="max-w-[1600px] mx-auto p-4 md:p-8 mt-4">
             
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                
                 <div class="lg:col-span-3">
                     <div class="panel">
-                        <div class="section-title"><i class="fa-solid fa-earth-americas"></i> Paramètres de Ciblage International & Jeunesse</div>
+                        <div class="section-title"><i class="fa-solid fa-users-viewfinder"></i> Base de Données Cible Totale</div>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                             <div><span class="input-label">Prénom</span><input id="i-fn" class="input-box" placeholder="Ex: Rayan"></div>
                             <div><span class="input-label">Nom de Famille</span><input id="i-ln" class="input-box" placeholder="Cherif"></div>
-                            <div><span class="input-label">Pays de la Cible</span><input id="i-nat" class="input-box" placeholder="France, Maroc, Canada..."></div>
-                            <div><span class="input-label">Pseudo (@) / GamerTag</span><input id="i-un" class="input-box" placeholder="Pseudo principal"></div>
+                            <div><span class="input-label">Nom Jeune Fille</span><input id="i-mn" class="input-box" placeholder="Optionnel"></div>
+                            <div><span class="input-label">Date Naissance</span><input id="i-dob" class="input-box" placeholder="JJ/MM/AAAA"></div>
                             
                             <div class="md:col-span-2"><span class="input-label">Adresse / Rue</span><input id="i-ad" class="input-box"></div>
-                            <div><span class="input-label">Code Postal / Ville</span><input id="i-ci" class="input-box" placeholder="Ex: Bruxelles"></div>
-                            <div><span class="input-label">École / Lycée / Collège</span><input id="i-school" class="input-box" placeholder="Lycée..."></div>
+                            <div><span class="input-label">Anciennes Adresses</span><input id="i-old" class="input-box"></div>
+                            <div><span class="input-label">Code Postal / Ville</span><input id="i-ci" class="input-box" placeholder="Ex: Paris"></div>
+                            
+                            <div><span class="input-label">Pays</span><input id="i-nat" class="input-box" placeholder="France, Maroc..."></div>
+                            <div><span class="input-label">Matricule CAF</span><input id="i-caf" class="input-box" placeholder="Optionnel"></div>
+                            <div><span class="input-label">N° Sécu (NIR)</span><input id="i-nir" class="input-box"></div>
+                            <div><span class="input-label">Plaque Véhicule</span><input id="i-pl" class="input-box"></div>
 
-                            <div><span class="input-label">Email</span><input id="i-em" class="input-box"></div>
+                            <div><span class="input-label">Email</span><input id="i-em" class="input-box" placeholder="mail@gmail.com"></div>
                             <div><span class="input-label">Téléphone</span><input id="i-ph" class="input-box"></div>
-                            <div><span class="input-label">Jeux joués</span><input id="i-game" class="input-box" placeholder="Minecraft, Roblox..."></div>
-                            <div><span class="input-label">Lien Photo (URL)</span><input id="i-pic" class="input-box" placeholder="https://..."></div>
+                            <div><span class="input-label">Pseudo / GamerTag</span><input id="i-un" class="input-box" placeholder="@pseudo"></div>
+                            <div><span class="input-label">Jeux / Console</span><input id="i-game" class="input-box" placeholder="Minecraft, PSN..."></div>
+                            
+                            <div><span class="input-label">Nom du Père</span><input id="i-fat" class="input-box"></div>
+                            <div><span class="input-label">Nom de la Mère</span><input id="i-mot" class="input-box"></div>
+                            <div><span class="input-label">École / Travail</span><input id="i-school" class="input-box"></div>
+                            <div><span class="input-label">Lien Photo URL</span><input id="i-pic" class="input-box" placeholder="https://..."></div>
                         </div>
 
-                        <button onclick="strike()" class="btn-master">Lancer le scan Global & Mineurs</button>
+                        <button onclick="strike()" class="btn-master">Initialiser l'Extraction Totale</button>
                     </div>
                 </div>
 
@@ -155,57 +195,80 @@
                     <div class="panel h-full flex flex-col">
                         <div class="section-title text-green-500 border-green-500/30">Console Opérationnelle</div>
                         <div id="term" class="flex-1 bg-black p-4 border border-white/10 rounded text-[10px] text-green-500 font-mono overflow-y-auto">
-                            > MOTEUR V31 OMNISCIENT PRÊT.<br>> PROTOCOLES JEUNESSE ACTIVÉS.<br>> EN ATTENTE...
+                            > MOTEUR V33 SYNDICATE CHARGÉ.<br>> TOUS LES OUTILS DÉVERROUILLÉS.<br>> EN ATTENTE DE CIBLE...
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="results-hub" class="hidden mt-6">
+            <div id="results-hub" class="hidden mt-6 pb-20">
                 
-                <div class="dossier-card mb-8">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-2xl font-black italic uppercase text-white">Dossier #<span id="uid-num"></span></h3>
-                        <span class="bg-red-600 text-white text-[10px] px-2 py-1 font-bold rounded uppercase">Recherche Internationale</span>
+                <div class="dossier-card mb-10">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-3xl font-black italic uppercase text-white">Dossier Cible #<span id="uid-num"></span></h3>
+                        <div>
+                            <span class="status-badge bg-blue-tag" style="background:#388bfd; color:white;">RECHERCHE ACTIVE</span>
+                            <span class="status-badge bg-red-tag" style="background:#d21034; color:white;">HMD_SYNDICATE</span>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div class="data-row"><span class="d-label">Identité</span><span class="d-val" id="r-name"></span></div>
-                        <div class="data-row"><span class="d-label">Zone/Pays</span><span class="d-val" id="r-loc"></span></div>
-                        <div class="data-row"><span class="d-label">Pseudo/Gaming</span><span class="d-val" id="r-game"></span></div>
-                        <div class="data-row"><span class="d-label">École</span><span class="d-val text-blue-400" id="r-school"></span></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div>
+                            <div class="data-row"><span class="d-label">Identité</span><span class="d-val" id="r-name"></span></div>
+                            <div class="data-row"><span class="d-label">Date Naiss.</span><span class="d-val" id="r-dob"></span></div>
+                            <div class="data-row"><span class="d-label">Pays/Ville</span><span class="d-val" id="r-loc"></span></div>
+                        </div>
+                        <div>
+                            <div class="data-row"><span class="d-label">Email/Tél</span><span class="d-val" id="r-con"></span></div>
+                            <div class="data-row"><span class="d-label">Pseudo/Jeu</span><span class="d-val" id="r-game"></span></div>
+                            <div class="data-row"><span class="d-label">Parents</span><span class="d-val" id="r-fam"></span></div>
+                        </div>
+                        <div>
+                            <div class="data-row"><span class="d-label">Matricule CAF</span><span class="d-val text-red-500" id="r-caf"></span></div>
+                            <div class="data-row"><span class="d-label">N° Sécurité Soc.</span><span class="d-val text-red-500" id="r-nir"></span></div>
+                            <div class="data-row"><span class="d-label">Travail/École</span><span class="d-val text-blue-400" id="r-school"></span></div>
+                        </div>
+                        <div>
+                            <div class="data-row"><span class="d-label">Véhicule</span><span class="d-val" id="r-pl"></span></div>
+                            <div class="data-row"><span class="d-label">Photo Fournie</span><span class="d-val text-green-500" id="r-pic"></span></div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     
-                    <div class="panel p-4" style="border-top: 4px solid var(--neon-pink); margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-pink-500 uppercase mb-3"><i class="fa-solid fa-gamepad mr-2"></i> Mineurs & Gaming</h4>
-                        <div id="out-youth" class="space-y-2"></div>
-                    </div>
-
-                    <div class="panel p-4" style="border-top: 4px solid var(--dz-green); margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-green-500 uppercase mb-3"><i class="fa-solid fa-earth-americas mr-2"></i> Adresses Internationales</h4>
-                        <div id="out-intl" class="space-y-2"></div>
-                    </div>
-
-                    <div class="panel p-4" style="border-top: 4px solid var(--neon-blue); margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-blue-400 uppercase mb-3"><i class="fa-solid fa-camera mr-2"></i> Images & Visages</h4>
-                        <div id="out-img" class="space-y-2"></div>
-                    </div>
-
-                    <div class="panel p-4" style="border-top: 4px solid var(--neon-gold); margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-yellow-500 uppercase mb-3"><i class="fa-solid fa-graduation-cap mr-2"></i> Écoles & Examens</h4>
-                        <div id="out-school" class="space-y-2"></div>
-                    </div>
-
-                    <div class="panel p-4" style="border-top: 4px solid var(--dz-red); margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-red-500 uppercase mb-3"><i class="fa-solid fa-database mr-2"></i> Fuites & Mails</h4>
+                    <div class="panel p-5" style="border-top: 4px solid var(--dz-red); margin-bottom: 0;">
+                        <h4 class="text-xs font-bold text-red-500 uppercase mb-4"><i class="fa-solid fa-database mr-2"></i> Fuites & Mots de Passe</h4>
                         <div id="out-leaks" class="space-y-2"></div>
                     </div>
 
-                    <div class="panel p-4" style="border-top: 4px solid #fff; margin-bottom: 0;">
-                        <h4 class="text-xs font-bold text-white uppercase mb-3"><i class="fa-solid fa-globe mr-2"></i> Réseaux Sociaux</h4>
-                        <div id="out-soc" class="space-y-2"></div>
+                    <div class="panel p-5" style="border-top: 4px solid var(--neon-gold); margin-bottom: 0;">
+                        <h4 class="text-xs font-bold text-yellow-500 uppercase mb-4"><i class="fa-solid fa-building-columns mr-2"></i> Admin, CAF & Impôts</h4>
+                        <div id="out-gov" class="space-y-2"></div>
+                    </div>
+
+                    <div class="panel p-5" style="border-top: 4px solid var(--neon-pink); margin-bottom: 0;">
+                        <h4 class="text-xs font-bold text-pink-500 uppercase mb-4"><i class="fa-solid fa-gamepad mr-2"></i> Mineurs & Gaming</h4>
+                        <div id="out-youth" class="space-y-2"></div>
+                    </div>
+
+                    <div class="panel p-5" style="border-top: 4px solid var(--dz-green); margin-bottom: 0;">
+                        <h4 class="text-xs font-bold text-green-500 uppercase mb-4"><i class="fa-solid fa-earth-americas mr-2"></i> Adresses & International</h4>
+                        <div id="out-intl" class="space-y-2"></div>
+                    </div>
+
+                    <div class="panel p-5" style="border-top: 4px solid var(--neon-teal); margin-bottom: 0;">
+                        <h4 class="text-xs font-bold text-teal-400 uppercase mb-4"><i class="fa-solid fa-graduation-cap mr-2"></i> Écoles, Âge & PDF</h4>
+                        <div id="out-school" class="space-y-2"></div>
+                    </div>
+
+                    <div class="panel p-5" style="border-top: 4px solid var(--neon-blue); margin-bottom: 0;">
+                        <h4 class="text-xs font-bold text-blue-400 uppercase mb-4"><i class="fa-solid fa-camera mr-2"></i> Photos & Visages</h4>
+                        <div id="out-img" class="space-y-2"></div>
+                    </div>
+
+                    <div class="panel p-5 xl:col-span-2" style="border-top: 4px solid #fff; margin-bottom: 0;">
+                        <h4 class="text-xs font-bold text-white uppercase mb-4"><i class="fa-solid fa-globe mr-2"></i> Réseaux & OSINT Total</h4>
+                        <div id="out-soc" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
                     </div>
 
                 </div>
@@ -217,27 +280,55 @@
         // HORLOGE
         setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
 
-        // LANCEMENT DEPUIS LA PAGE D'ACCUEIL
-        function launchApp() {
-            document.getElementById('landing-page').style.transform = 'translateY(-100vh)';
+        // FAKE COMPTEUR UTILISATEURS
+        let baseUsers = 138;
+        setInterval(() => {
+            let fluctuation = Math.floor(Math.random() * 5) - 2; // entre -2 et +2
+            baseUsers += fluctuation;
+            if(baseUsers < 110) baseUsers = 110;
+            if(baseUsers > 180) baseUsers = 180;
+            document.getElementById('active-users').innerText = baseUsers;
+        }, 3000);
+
+        // FAKE LOGIN GMAIL
+        function simulateLogin() {
+            const btn = document.getElementById('login-btn');
+            const loader = document.getElementById('login-loader');
+            
+            btn.style.display = 'none';
+            loader.style.display = 'block';
+
+            // Simule un temps d'attente d'authentification
             setTimeout(() => {
-                document.getElementById('landing-page').style.display = 'none';
-                document.getElementById('app-container').style.display = 'block';
-            }, 800);
+                document.getElementById('landing-page').style.transform = 'translateY(-100vh)';
+                setTimeout(() => {
+                    document.getElementById('landing-page').style.display = 'none';
+                    document.getElementById('app-container').style.display = 'block';
+                }, 800);
+            }, 1500);
         }
 
-        // MOTEUR DE RECHERCHE
+        // MOTEUR OVERLORD V33
         function strike() {
             const data = {
                 fn: document.getElementById('i-fn').value.trim(),
                 ln: document.getElementById('i-ln').value.trim(),
-                nat: document.getElementById('i-nat').value.trim(),
+                mn: document.getElementById('i-mn').value.trim(),
+                dob: document.getElementById('i-dob').value.trim(),
+                ad: document.getElementById('i-ad').value.trim(),
+                old: document.getElementById('i-old').value.trim(),
                 ci: document.getElementById('i-ci').value.trim(),
+                nat: document.getElementById('i-nat').value.trim(),
+                caf: document.getElementById('i-caf').value.trim(),
+                nir: document.getElementById('i-nir').value.trim(),
+                pl: document.getElementById('i-pl').value.trim(),
                 em: document.getElementById('i-em').value.trim(),
                 ph: document.getElementById('i-ph').value.trim(),
                 un: document.getElementById('i-un').value.trim().replace('@',''),
-                school: document.getElementById('i-school').value.trim(),
                 game: document.getElementById('i-game').value.trim(),
+                fat: document.getElementById('i-fat').value.trim(),
+                mot: document.getElementById('i-mot').value.trim(),
+                school: document.getElementById('i-school').value.trim(),
                 pic: document.getElementById('i-pic').value.trim()
             };
 
@@ -246,75 +337,89 @@
             document.getElementById('results-hub').classList.remove('hidden');
             
             // MAJ DOSSIER
-            document.getElementById('uid-num').innerText = Math.floor(Math.random()*90000) + "-DZ";
+            document.getElementById('uid-num').innerText = Math.floor(Math.random()*900000);
             document.getElementById('r-name').innerText = `${data.fn} ${data.ln}`.trim() || "INCONNU";
+            document.getElementById('r-dob').innerText = data.dob || "NON DÉFINIE";
             document.getElementById('r-loc').innerText = `${data.ci} ${data.nat}`.trim() || "NON SPÉCIFIÉE";
-            document.getElementById('r-game').innerText = data.un || "AUCUN PSEUDO";
+            document.getElementById('r-con').innerText = data.em || data.ph || "AUCUN";
+            document.getElementById('r-game').innerText = data.un || data.game || "AUCUN";
+            document.getElementById('r-fam').innerText = `${data.fat || '?'} / ${data.mot || '?'}`;
+            document.getElementById('r-caf').innerText = data.caf || "SCAN REQUIS";
+            document.getElementById('r-nir').innerText = data.nir || "SCAN REQUIS";
             document.getElementById('r-school').innerText = data.school || "NON SPÉCIFIÉE";
+            document.getElementById('r-pl').innerText = data.pl || "AUCUNE";
+            document.getElementById('r-pic').innerText = data.pic ? "OUI" : "NON";
 
-            // OUTILS DE RECHERCHE
-            const oYouth = document.getElementById('out-youth');
-            const oIntl = document.getElementById('out-intl');
-            const oImg = document.getElementById('out-img');
-            const oSchool = document.getElementById('out-school');
-            const oLeaks = document.getElementById('out-leaks');
-            const oSoc = document.getElementById('out-soc');
+            // Vider les boites
+            const boxes = ['out-leaks', 'out-gov', 'out-youth', 'out-intl', 'out-school', 'out-img', 'out-soc'];
+            boxes.forEach(id => document.getElementById(id).innerHTML = "");
 
-            oYouth.innerHTML = oIntl.innerHTML = oImg.innerHTML = oSchool.innerHTML = oLeaks.innerHTML = oSoc.innerHTML = "";
+            const term = data.fn + '+' + data.ln;
 
-            // 1. MINEURS & GAMING
-            const youthLinks = [
-                {t: "NameMC (Historique pseudo Minecraft)", l: `https://namemc.com/search?q=${data.un || data.fn+data.ln}`},
-                {t: "SteamID (Recherche Joueur Steam)", l: `https://steamid.io/lookup/${data.un || data.fn+data.ln}`},
-                {t: "TikTok Intelligence", l: `https://www.tiktok.com/search/user?q=${data.un || data.fn+'+'+data.ln}`},
-                {t: "Snapchat (Découverte)", l: `https://www.snapchat.com/add/${data.un || data.fn+data.ln}`}
-            ];
-
-            // 2. INTERNATIONAL & ANNUAIRES
-            const intlLinks = [
-                {t: "Recherche Globale d'Annuaire", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+directory+OR+annuaire+OR+phonebook+${data.nat || ''}`},
-                {t: "WebMii (Recherche Internationale)", l: `https://webmii.com/people?n=%22${data.fn}%20${data.ln}%22`},
-                {t: "Pipl / FamilyTree (Global)", l: `https://www.familytreenow.com/search/genealogy/results?first=${data.fn}&last=${data.ln}`},
-                {t: "PagesBlanches (France uniquement)", l: `https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${data.fn}+${data.ln}&ou=${data.ci}`}
-            ];
-
-            // 3. IMAGES & VISAGES
-            const imgLinks = [
-                {t: "FaceCheck.ID (Reconnaissance)", l: `https://facecheck.id/`},
-                {t: "Yandex (Recherche visage)", l: `https://yandex.com/images/search?url=${data.pic || ''}&rpt=imageview`},
-                {t: "TinEye (Retrouver la photo)", l: `https://tineye.com/search?url=${data.pic || ''}`}
-            ];
-
-            // 4. ÉCOLES & RÉSULTATS SCOLAIRES
-            const schoolLinks = [
-                {t: "Résultats Brevet/Bac (Google Dork)", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+admis+OR+resultat+OR+bac+OR+brevet+${data.school || ''}`},
-                {t: "Listes Scolaires (Fichiers PDF)", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+${data.school || ''}+filetype:pdf`},
-                {t: "Copains d'Avant (Écoles passées)", l: `https://copainsdavant.linternaute.com/s/?q=${data.fn}+${data.ln}`}
-            ];
-
-            // 5. LEAKS
+            // 1. LEAKS
             const leaksLinks = [
-                {t: "IntelligenceX (Moteur Global)", l: `https://intelx.io/?s=${data.em || data.un || data.fn + '+' + data.ln}`},
+                {t: "IntelligenceX (Moteur Global)", l: `https://intelx.io/?s=${data.em || data.un || term}`},
                 {t: "BreachDirectory (Mots de passe)", l: `https://breachdirectory.org/`},
-                {t: "Epieos (Infos du Mail Google)", l: `https://epieos.com/?q=${data.em}`}
+                {t: "LeakCheck (Scanner Mails)", l: `https://leakcheck.io/`},
+                {t: "Epieos (Empreinte Email Maps)", l: `https://epieos.com/?q=${data.em}`}
             ];
 
-            // 6. SOCIAUX
+            // 2. ADMIN, CAF & GOUV (Dorks Spécifiques)
+            const govLinks = [
+                {t: "Listes Administratives Excel", l: `https://www.google.com/search?q=%22${term}%22+filetype:xls+OR+filetype:csv`},
+                {t: "Documents Gouv.fr", l: `https://www.google.com/search?q=%22${term}%22+site:gouv.fr`},
+                {t: "Cadastre & Propriétés Immo", l: `https://www.google.com/search?q=%22${term}%22+proprietaire+OR+adresse+OR+SCI`},
+                {t: "Avis de Décès/Naissances", l: `https://www.libramemoria.com/defunts/avis?nom=${data.ln}&prenom=${data.fn}`}
+            ];
+
+            // 3. MINEURS & GAMING
+            const youthLinks = [
+                {t: "NameMC (Historique Minecraft)", l: `https://namemc.com/search?q=${data.un || term}`},
+                {t: "SteamID (Recherche Joueur)", l: `https://steamid.io/lookup/${data.un || term}`},
+                {t: "TikTok Intelligence", l: `https://www.tiktok.com/search/user?q=${data.un || term}`},
+                {t: "Snapchat Discovery", l: `https://www.snapchat.com/add/${data.un || term}`}
+            ];
+
+            // 4. INTERNATIONAL & ADRESSES
+            const intlLinks = [
+                {t: "PagesBlanches (France)", l: `https://www.pagesjaunes.fr/pagesblanches/recherche?quoiqui=${term}&ou=${data.ci}`},
+                {t: "WebMii (Recherche Mondiale)", l: `https://webmii.com/people?n=%22${data.fn}%20${data.ln}%22`},
+                {t: "Global Directory Dork", l: `https://www.google.com/search?q=%22${term}%22+directory+OR+annuaire+OR+phonebook+${data.nat || ''}`},
+                {t: "Pipl / FamilyTree (Global)", l: `https://www.familytreenow.com/search/genealogy/results?first=${data.fn}&last=${data.ln}`}
+            ];
+
+            // 5. ECOLES & PDF
+            const schoolLinks = [
+                {t: "Résultats Examens/Brevet/Bac", l: `https://www.google.com/search?q=%22${term}%22+admis+OR+resultat+OR+bac+OR+brevet+${data.school || ''}`},
+                {t: "Dossiers Scolaires / CV (PDF)", l: `https://www.google.com/search?q=%22${term}%22+${data.school || ''}+filetype:pdf`},
+                {t: "Copains d'Avant (Confirmer Âge)", l: `https://copainsdavant.linternaute.com/s/?q=${term}`}
+            ];
+
+            // 6. IMAGES
+            const imgLinks = [
+                {t: "FaceCheck.ID (Scanner Visage)", l: `https://facecheck.id/`},
+                {t: "Yandex (Recherche Image)", l: `https://yandex.com/images/search?url=${data.pic || ''}&rpt=imageview`},
+                {t: "Google Images (Reverse)", l: `https://lens.google.com/uploadbyurl?url=${data.pic || ''}`}
+            ];
+
+            // 7. SOCIAUX (Grille double)
             const socLinks = [
-                {t: "WhatsMyName (Traque pseudo globale)", l: `https://whatsmyname.app/?q=${data.un || data.fn + data.ln}`},
-                {t: "Facebook Search", l: `https://www.facebook.com/search/people/?q=${data.fn}+${data.ln}`},
-                {t: "Instagram (Mentions Google)", l: `https://www.google.com/search?q=site:instagram.com+%22${data.fn}+${data.ln}%22`}
+                {t: "WhatsMyName (Traque Pseudos)", l: `https://whatsmyname.app/?q=${data.un || term}`},
+                {t: "Facebook People Search", l: `https://www.facebook.com/search/people/?q=${term}`},
+                {t: "Instagram Mentions", l: `https://www.google.com/search?q=site:instagram.com+%22${term}%22`},
+                {t: "LinkedIn (Travail & Études)", l: `https://www.google.com/search?q=site:linkedin.com/in+%22${term}%22`}
             ];
 
             // Remplissage
-            youthLinks.forEach(x => oYouth.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-pink)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
-            intlLinks.forEach(x => oIntl.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--dz-green)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
-            imgLinks.forEach(x => oImg.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-blue)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
-            schoolLinks.forEach(x => oSchool.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-gold)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
-            leaksLinks.forEach(x => oLeaks.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--dz-red)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
-            socLinks.forEach(x => oSoc.innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: #fff"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            leaksLinks.forEach(x => document.getElementById('out-leaks').innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--dz-red)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            govLinks.forEach(x => document.getElementById('out-gov').innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-gold)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            youthLinks.forEach(x => document.getElementById('out-youth').innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-pink)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            intlLinks.forEach(x => document.getElementById('out-intl').innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--dz-green)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            schoolLinks.forEach(x => document.getElementById('out-school').innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-teal)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            imgLinks.forEach(x => document.getElementById('out-img').innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: var(--neon-blue)"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
+            socLinks.forEach(x => document.getElementById('out-soc').innerHTML += `<a href="${x.l}" target="_blank" class="tool-btn" style="border-left-color: #fff"><span>${x.t}</span> <i class="fa-solid fa-arrow-right"></i></a>`);
 
-            document.getElementById('term').innerHTML += `<div>[${new Date().toLocaleTimeString()}] > DONNÉES INTERNATIONALES ET MINEURS EXTRAITES.</div>`;
+            document.getElementById('term').innerHTML += `<div>[${new Date().toLocaleTimeString()}] > EXTRACTION TITAN TERMINÉE. OUTILS DÉPLOYÉS.</div>`;
             document.getElementById('results-hub').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
