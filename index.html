@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMD-DZ | V33 THE SYNDICATE</title>
+    <title>HMD-DZ | V34 THE CHRONICLE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -24,16 +24,19 @@
         * { box-sizing: border-box; font-family: 'JetBrains Mono', monospace; }
         body { background-color: var(--bg-black); color: #c9d1d9; margin: 0; overflow-x: hidden; }
 
-        /* --- TICKER NEWS (BARRE DÉFILANTE) --- */
+        /* --- TICKER NEWS (BARRE DÉFILANTE INTÉGRÉE & LENTE) --- */
         .news-ticker-wrap {
-            width: 100%; background: var(--dz-red); color: white; padding: 6px 0;
-            overflow: hidden; border-bottom: 2px solid #000; position: fixed; top: 0; z-index: 30000;
+            width: 100%; background: #0a0c10; color: #8b949e; padding: 12px 15px;
+            overflow: hidden; border: 1px solid #30363d; border-radius: 6px;
+            margin-bottom: 25px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
         .news-ticker-content {
             display: inline-block; padding-left: 100%; white-space: nowrap;
             font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
-            animation: ticker 35s linear infinite;
+            animation: ticker 90s linear infinite; /* Vitesse très lente (90 secondes) */
         }
+        .ticker-highlight { color: var(--dz-red); }
+        .ticker-tip { color: var(--dz-green); }
         @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
         /* --- PAGE D'ACCUEIL (LOGIN) --- */
@@ -63,7 +66,7 @@
         .btn-gmail:hover { background: #e2e8f0; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,255,255,0.2); }
 
         /* --- UI COMPONENTS --- */
-        #app-container { display: none; padding-bottom: 100px; padding-top: 30px; } /* padding-top for ticker */
+        #app-container { display: none; padding-bottom: 100px; }
         
         .header-bar { border-bottom: 2px solid var(--dz-green); padding: 30px 20px; background: #000; }
         
@@ -111,15 +114,11 @@
         .d-val { color: #fff; font-size: 0.85rem; font-weight: bold; text-align: right; }
         
         .status-badge { font-size: 0.6rem; padding: 3px 8px; border-radius: 4px; font-weight: 800; text-transform: uppercase; margin-left: 5px; }
+        .bg-blue-tag { background: #388bfd; color: #fff; }
+        .bg-red-tag { background: var(--dz-red); color: #fff; }
     </style>
 </head>
 <body>
-
-    <div class="news-ticker-wrap">
-        <div class="news-ticker-content">
-            🔴 FLASH INFO : Le conflit en Palestine s'intensifie, alerte humanitaire à Gaza. | 🟢 LE SAVIEZ-VOUS ? 80% des adresses physiques peuvent être trouvées via des fuites de livraisons (Vinted, Amazon). | 🔴 TENSIONS : L'Iran menace de nouvelles représailles au Moyen-Orient suite aux récents événements. | 🟢 LE SAVIEZ-VOUS ? Les pseudos de jeux vidéo (Minecraft, PSN) sont le meilleur moyen de retrouver l'identité réelle d'un mineur. | 🔴 CYBER-GUERRE : Augmentation des attaques DDOS et des fuites de bases de données gouvernementales. | 🟢 ASTUCE OSINT : Utilisez Epieos pour vérifier si un email est relié à un compte Google Maps.
-        </div>
-    </div>
 
     <div id="landing-page">
         <div class="flex gap-8 mb-4 text-5xl"><span>🇩🇿</span><span>🇦🇫</span></div>
@@ -138,12 +137,12 @@
 
     <div id="app-container">
         
-        <header class="header-bar flex flex-col md:flex-row justify-between items-center mt-4">
+        <header class="header-bar flex flex-col md:flex-row justify-between items-center">
             <div class="flex items-center gap-6">
                 <span class="text-4xl">🇩🇿</span>
                 <div class="text-left">
                     <h2 class="hero-logo">HMD-DZ</h2>
-                    <p class="text-[10px] uppercase tracking-[0.4em] text-red-500 font-bold">Total OSINT & Breach Dashboard V33</p>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-red-500 font-bold">Total OSINT & Breach Dashboard V34</p>
                 </div>
             </div>
             <div class="font-mono text-[10px] opacity-80 mt-4 md:mt-0 text-right bg-black/50 p-3 rounded border border-white/10">
@@ -155,6 +154,12 @@
 
         <div class="max-w-[1600px] mx-auto p-4 md:p-8 mt-4">
             
+            <div class="news-ticker-wrap">
+                <div class="news-ticker-content">
+                    <span class="ticker-highlight">🔴 FLASH INFO :</span> Le conflit en Palestine s'intensifie, la situation géopolitique reste sous haute tension. &nbsp;&nbsp; | &nbsp;&nbsp; <span class="ticker-tip">🟢 LE SAVIEZ-VOUS ?</span> 80% des adresses physiques peuvent être trouvées via des fuites de livraisons (Vinted, Amazon). &nbsp;&nbsp; | &nbsp;&nbsp; <span class="ticker-highlight">🔴 TENSIONS :</span> L'Iran menace de nouvelles représailles au Moyen-Orient suite aux récents événements. &nbsp;&nbsp; | &nbsp;&nbsp; <span class="ticker-tip">🟢 LE SAVIEZ-VOUS ?</span> Les pseudos de jeux vidéo (Minecraft, PSN) sont le meilleur moyen de retrouver l'identité réelle d'un mineur. &nbsp;&nbsp; | &nbsp;&nbsp; <span class="ticker-highlight">🔴 CYBER-GUERRE :</span> Augmentation des attaques DDOS et des fuites de bases de données gouvernementales. &nbsp;&nbsp; | &nbsp;&nbsp; <span class="ticker-tip">🟢 ASTUCE OSINT :</span> Utilisez Epieos pour vérifier si un email est relié à un compte Google Maps ou un avis public.
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
                 
                 <div class="lg:col-span-3">
@@ -195,7 +200,7 @@
                     <div class="panel h-full flex flex-col">
                         <div class="section-title text-green-500 border-green-500/30">Console Opérationnelle</div>
                         <div id="term" class="flex-1 bg-black p-4 border border-white/10 rounded text-[10px] text-green-500 font-mono overflow-y-auto">
-                            > MOTEUR V33 SYNDICATE CHARGÉ.<br>> TOUS LES OUTILS DÉVERROUILLÉS.<br>> EN ATTENTE DE CIBLE...
+                            > MOTEUR V34 CHRONICLE CHARGÉ.<br>> TOUS LES OUTILS DÉVERROUILLÉS.<br>> EN ATTENTE DE CIBLE...
                         </div>
                     </div>
                 </div>
@@ -208,7 +213,7 @@
                         <h3 class="text-3xl font-black italic uppercase text-white">Dossier Cible #<span id="uid-num"></span></h3>
                         <div>
                             <span class="status-badge bg-blue-tag" style="background:#388bfd; color:white;">RECHERCHE ACTIVE</span>
-                            <span class="status-badge bg-red-tag" style="background:#d21034; color:white;">HMD_SYNDICATE</span>
+                            <span class="status-badge bg-red-tag" style="background:#d21034; color:white;">HMD_CHRONICLE</span>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -283,7 +288,7 @@
         // FAKE COMPTEUR UTILISATEURS
         let baseUsers = 138;
         setInterval(() => {
-            let fluctuation = Math.floor(Math.random() * 5) - 2; // entre -2 et +2
+            let fluctuation = Math.floor(Math.random() * 5) - 2;
             baseUsers += fluctuation;
             if(baseUsers < 110) baseUsers = 110;
             if(baseUsers > 180) baseUsers = 180;
@@ -298,7 +303,6 @@
             btn.style.display = 'none';
             loader.style.display = 'block';
 
-            // Simule un temps d'attente d'authentification
             setTimeout(() => {
                 document.getElementById('landing-page').style.transform = 'translateY(-100vh)';
                 setTimeout(() => {
@@ -308,7 +312,7 @@
             }, 1500);
         }
 
-        // MOTEUR OVERLORD V33
+        // MOTEUR OVERLORD V34
         function strike() {
             const data = {
                 fn: document.getElementById('i-fn').value.trim(),
@@ -364,7 +368,7 @@
                 {t: "Epieos (Empreinte Email Maps)", l: `https://epieos.com/?q=${data.em}`}
             ];
 
-            // 2. ADMIN, CAF & GOUV (Dorks Spécifiques)
+            // 2. ADMIN, CAF & GOUV
             const govLinks = [
                 {t: "Listes Administratives Excel", l: `https://www.google.com/search?q=%22${term}%22+filetype:xls+OR+filetype:csv`},
                 {t: "Documents Gouv.fr", l: `https://www.google.com/search?q=%22${term}%22+site:gouv.fr`},
@@ -402,7 +406,7 @@
                 {t: "Google Images (Reverse)", l: `https://lens.google.com/uploadbyurl?url=${data.pic || ''}`}
             ];
 
-            // 7. SOCIAUX (Grille double)
+            // 7. SOCIAUX
             const socLinks = [
                 {t: "WhatsMyName (Traque Pseudos)", l: `https://whatsmyname.app/?q=${data.un || term}`},
                 {t: "Facebook People Search", l: `https://www.facebook.com/search/people/?q=${term}`},
