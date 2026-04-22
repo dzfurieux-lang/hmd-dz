@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMD-DZ | V30 THE GLOBALIST</title>
+    <title>HMD-DZ | V31 THE OMNISCIENT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -23,8 +23,33 @@
         * { box-sizing: border-box; font-family: 'JetBrains Mono', monospace; }
         body { background-color: var(--bg-black); color: #c9d1d9; margin: 0; overflow-x: hidden; }
 
+        /* --- PAGE D'ACCUEIL (LANDING PAGE) --- */
+        #landing-page {
+            position: fixed; inset: 0; background: #000; z-index: 20000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .hero-logo-landing {
+            font-family: 'Orbitron', sans-serif; font-size: clamp(4rem, 15vw, 10rem); font-weight: 900;
+            background: linear-gradient(to right, var(--dz-green) 40%, #fff 50%, var(--dz-red) 60%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); letter-spacing: -6px;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+
+        .btn-enter {
+            margin-top: 40px; padding: 20px 60px; border: 2px solid #30363d; background: transparent;
+            color: white; font-weight: 900; text-transform: uppercase; letter-spacing: 5px; 
+            cursor: pointer; transition: 0.3s; border-radius: 4px; font-size: 1.2rem;
+        }
+
+        .btn-enter:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 0 40px rgba(255, 255, 255, 0.4); }
+
         /* --- UI COMPONENTS --- */
-        #app-container { padding-bottom: 100px; }
+        #app-container { display: none; padding-bottom: 100px; }
         
         .header-bar { border-bottom: 2px solid var(--dz-green); padding: 30px 20px; text-align: center; background: #000; }
         
@@ -76,13 +101,21 @@
 </head>
 <body>
 
+    <div id="landing-page">
+        <div class="flex gap-8 mb-6 text-6xl"><span>🇩🇿</span><span>🇦🇫</span></div>
+        <h1 class="hero-logo-landing">HMD-DZ</h1>
+        <p class="tracking-[1.5em] text-[10px] opacity-50 uppercase font-bold mt-4">The Omniscient Intelligence Engine • v31</p>
+        <button onclick="launchApp()" class="btn-enter">Initialiser le système</button>
+        <div class="mt-20 font-mono text-[8px] opacity-20 uppercase tracking-[1em]">Secure Access Required</div>
+    </div>
+
     <div id="app-container">
         <header class="header-bar flex flex-col md:flex-row justify-between items-center">
             <div class="flex items-center gap-6">
                 <span class="text-4xl">🇩🇿</span>
                 <div class="text-left">
                     <h2 class="hero-logo">HMD-DZ</h2>
-                    <p class="text-[10px] uppercase tracking-[0.4em] text-red-500 font-bold">Global & Youth OSINT V30</p>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-red-500 font-bold">Global & Youth OSINT V31</p>
                 </div>
             </div>
             <div class="font-mono text-[10px] opacity-50 mt-4 md:mt-0 text-right">
@@ -122,7 +155,7 @@
                     <div class="panel h-full flex flex-col">
                         <div class="section-title text-green-500 border-green-500/30">Console Opérationnelle</div>
                         <div id="term" class="flex-1 bg-black p-4 border border-white/10 rounded text-[10px] text-green-500 font-mono overflow-y-auto">
-                            > MOTEUR V30 GLOBALIST PRÊT.<br>> PROTOCOLES JEUNESSE ACTIVÉS.<br>> EN ATTENTE...
+                            > MOTEUR V31 OMNISCIENT PRÊT.<br>> PROTOCOLES JEUNESSE ACTIVÉS.<br>> EN ATTENTE...
                         </div>
                     </div>
                 </div>
@@ -181,8 +214,19 @@
     </div>
 
     <script>
+        // HORLOGE
         setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
 
+        // LANCEMENT DEPUIS LA PAGE D'ACCUEIL
+        function launchApp() {
+            document.getElementById('landing-page').style.transform = 'translateY(-100vh)';
+            setTimeout(() => {
+                document.getElementById('landing-page').style.display = 'none';
+                document.getElementById('app-container').style.display = 'block';
+            }, 800);
+        }
+
+        // MOTEUR DE RECHERCHE
         function strike() {
             const data = {
                 fn: document.getElementById('i-fn').value.trim(),
@@ -218,7 +262,7 @@
 
             oYouth.innerHTML = oIntl.innerHTML = oImg.innerHTML = oSchool.innerHTML = oLeaks.innerHTML = oSoc.innerHTML = "";
 
-            // 1. MINEURS & GAMING (Nouveau)
+            // 1. MINEURS & GAMING
             const youthLinks = [
                 {t: "NameMC (Historique pseudo Minecraft)", l: `https://namemc.com/search?q=${data.un || data.fn+data.ln}`},
                 {t: "SteamID (Recherche Joueur Steam)", l: `https://steamid.io/lookup/${data.un || data.fn+data.ln}`},
@@ -226,7 +270,7 @@
                 {t: "Snapchat (Découverte)", l: `https://www.snapchat.com/add/${data.un || data.fn+data.ln}`}
             ];
 
-            // 2. INTERNATIONAL & ANNUAIRES (Nouveau Dork Global)
+            // 2. INTERNATIONAL & ANNUAIRES
             const intlLinks = [
                 {t: "Recherche Globale d'Annuaire", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+directory+OR+annuaire+OR+phonebook+${data.nat || ''}`},
                 {t: "WebMii (Recherche Internationale)", l: `https://webmii.com/people?n=%22${data.fn}%20${data.ln}%22`},
@@ -241,7 +285,7 @@
                 {t: "TinEye (Retrouver la photo)", l: `https://tineye.com/search?url=${data.pic || ''}`}
             ];
 
-            // 4. ÉCOLES & RÉSULTATS SCOLAIRES (Pour trouver l'âge et la ville des jeunes)
+            // 4. ÉCOLES & RÉSULTATS SCOLAIRES
             const schoolLinks = [
                 {t: "Résultats Brevet/Bac (Google Dork)", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+admis+OR+resultat+OR+bac+OR+brevet+${data.school || ''}`},
                 {t: "Listes Scolaires (Fichiers PDF)", l: `https://www.google.com/search?q=%22${data.fn}+${data.ln}%22+${data.school || ''}+filetype:pdf`},
